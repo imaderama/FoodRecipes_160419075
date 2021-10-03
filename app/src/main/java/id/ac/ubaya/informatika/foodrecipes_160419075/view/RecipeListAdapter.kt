@@ -31,7 +31,7 @@ class RecipeListAdapter(val recipeList:ArrayList<Recipe>):RecyclerView.Adapter<R
             txtNama.text = recipeList[position].name
             txtCategory.text = recipeList[position].category
             imageView.loadImage(recipeList[position].poster.toString(), holder.view.progressBar)
-            txtId.text = recipeList[position].id.toString()
+            txtId.text = recipeList[position].recipe_id.toString()
 
             btnDetails.setOnClickListener {
                 val name = recipeList[position].name
