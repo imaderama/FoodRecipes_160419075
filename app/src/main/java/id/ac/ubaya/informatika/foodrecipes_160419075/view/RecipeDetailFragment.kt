@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
 import id.ac.ubaya.informatika.foodrecipes_160419075.util.loadImage
 import kotlinx.android.synthetic.main.fragment_recipe_detail.*
@@ -26,12 +27,18 @@ class RecipeDetailFragment : Fragment() {
             var category = RecipeDetailFragmentArgs.fromBundle(requireArguments()).category
             var like = RecipeDetailFragmentArgs.fromBundle(requireArguments()).like
             var poster = RecipeDetailFragmentArgs.fromBundle(requireArguments()).poster
+            var id = RecipeDetailFragmentArgs.fromBundle(requireArguments()).id
 
 
             txtNamaDetail.setText(name)
             txtCategoryDetail.setText(category)
             txtLike.setText(like.toString())
             imageView2.loadImage(poster, progressBar2)
+        }
+
+        btnIngredient.setOnClickListener {
+            val action = RecipeDetailFragmentDirections.actionIngredientList(id)
+            Navigation.findNavController(it).navigate(action)
         }
     }
 }

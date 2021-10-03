@@ -7,3 +7,10 @@ data class Recipe(
     val likes:Int?,
     val poster:String?
 )
+
+class Ingredient(
+    val ingredient_id:Int?,
+    val recipe_id_ing:Int?,
+    val item:String?,
+    val amount:String?
+)

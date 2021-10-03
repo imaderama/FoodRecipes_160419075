@@ -38,7 +38,8 @@ class RecipeListAdapter(val recipeList:ArrayList<Recipe>):RecyclerView.Adapter<R
                 val category = recipeList[position].category
                 val like = recipeList[position].likes
                 val poster = recipeList[position].poster
-                val action = RecipeListFragmentDirections.actionRecipeDetail(name.toString(), category.toString(), like!!, poster.toString()
+                val id = recipeList[position].recipe_id
+                val action = RecipeListFragmentDirections.actionRecipeDetail(name.toString(), category.toString(), like!!, poster.toString(), id!!
                 )
                 Navigation.findNavController(it).navigate(action)
             }
