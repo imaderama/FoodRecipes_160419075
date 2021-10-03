@@ -17,5 +17,18 @@
         android:id="@+id/recipeDetailFragment"
         android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.RecipeDetailFragment"
         android:label="fragment_recipe_detail"
-        tools:layout="@layout/fragment_recipe_detail" />
+        tools:layout="@layout/fragment_recipe_detail" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <argument
+            android:name="like"
+            app:argType="integer" />
+        <argument
+            android:name="poster"
+            app:argType="string" />
+    </fragment>
 </navigation>
