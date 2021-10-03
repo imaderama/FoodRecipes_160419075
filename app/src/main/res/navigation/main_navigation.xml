@@ -11,10 +11,10 @@
         android:label="RecipeListFragment" >
         <action
             android:id="@+id/actionRecipeDetail"
-            app:destination="@id/recipeDetailFragment" />
+            app:destination="@id/actionRecipeDetail" />
     </fragment>
     <fragment
-        android:id="@+id/recipeDetailFragment"
+        android:id="@+id/actionRecipeDetail"
         android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.RecipeDetailFragment"
         android:label="fragment_recipe_detail"
         tools:layout="@layout/fragment_recipe_detail" />
