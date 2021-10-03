@@ -12,6 +12,8 @@ import kotlinx.android.synthetic.main.recipe_list_item.view.*
 class RecipeListAdapter(val recipeList:ArrayList<Recipe>):RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>() {
     class RecipeViewHolder(val view: View):RecyclerView.ViewHolder(view)
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val v = inflater.inflate(R.layout.recipe_list_item, parent, false)
@@ -25,7 +27,7 @@ class RecipeListAdapter(val recipeList:ArrayList<Recipe>):RecyclerView.Adapter<R
             txtCategory.text = recipeList[position].category
 
             btnDetails.setOnClickListener {
-//                val action = RecipeListFragmentDirections.action
+//                val action =
 //                Navigation.findNavController(it).navigate(action)
             }
         }
