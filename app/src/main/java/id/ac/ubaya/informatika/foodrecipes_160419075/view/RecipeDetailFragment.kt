@@ -30,7 +30,7 @@ class RecipeDetailFragment : Fragment() {
 
             txtNamaDetail.setText(name)
             txtCategoryDetail.setText(category)
-            txtLike.setText(like)
+            txtLike.setText(like.toString())
             imageView2.loadImage(poster, progressBar2)
         }
     }
