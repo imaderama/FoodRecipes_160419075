@@ -7,6 +7,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipe
+import id.ac.ubaya.informatika.foodrecipes_160419075.util.loadImage
 import kotlinx.android.synthetic.main.recipe_list_item.view.*
 
 class RecipeListAdapter(val recipeList:ArrayList<Recipe>):RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>() {
@@ -29,6 +30,7 @@ class RecipeListAdapter(val recipeList:ArrayList<Recipe>):RecyclerView.Adapter<R
         with(holder.view){
             txtNama.text = recipeList[position].name
             txtCategory.text = recipeList[position].category
+            imageView.loadImage(recipeList[position].poster.toString(), holder.view.progressBar)
 
             btnDetails.setOnClickListener {
                 val action = RecipeListFragmentDirections.actionRecipeDetail()
