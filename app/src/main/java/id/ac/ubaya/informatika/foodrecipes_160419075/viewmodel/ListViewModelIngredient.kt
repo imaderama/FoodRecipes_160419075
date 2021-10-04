@@ -23,7 +23,7 @@ class ListViewModelIngredient(application: Application): AndroidViewModel(applic
     private val TAG = "volleyTag"
     private var queue: RequestQueue?= null
 
-    fun refresh(id: Int){
+    fun refresh(id: String): String{
         loadingErrorLD.value = false
         loadingLD.value = true
 
@@ -102,12 +102,13 @@ class ListViewModelIngredient(application: Application): AndroidViewModel(applic
             override fun getParams(): MutableMap<String, String> {
                 val params = HashMap<String, String>()
 //                Log.d("AmbilParam", "Dapat")
-                params["id"] = id.toString()
+                params["id"] = id
                 return params
             }
         }
         stringRequest.tag = TAG
         queue?.add(stringRequest)
+        return ingredentsLD.value.toString()
     }
 
     override fun onCleared() {

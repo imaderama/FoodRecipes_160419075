@@ -1,6 +1,7 @@
 package id.ac.ubaya.informatika.foodrecipes_160419075.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,13 +26,15 @@ class IngredientListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var id = 0
+//        var id = 1
 
         if(arguments!=null){
-            id = IngredientListFragmentArgs.fromBundle(requireArguments()).id
+//            var id = IngredientListFragmentArgs.fromBundle(requireArguments()).id
         }
         viewModel = ViewModelProvider(this).get(ListViewModelIngredient::class.java)
-        viewModel.refresh(id)
+        viewModel.refresh(IngredientListFragmentArgs.fromBundle(requireArguments()).id.toString())
+
+        Log.d("SHOW ID", IngredientListFragmentArgs.fromBundle(requireArguments()).id.toString())
 
         recyclerView2.layoutManager = LinearLayoutManager(context)
         recyclerView2.adapter = ingredientListAdapter

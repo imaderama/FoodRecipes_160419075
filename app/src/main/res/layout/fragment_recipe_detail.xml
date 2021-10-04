@@ -100,5 +100,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnIngredient" />
 
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_baseline_thumb_up_alt_24"
+            app:layout_constraintStart_toEndOf="@+id/txtLike"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

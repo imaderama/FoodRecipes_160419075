@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/recipeListFragment">
+    app:startDestination="@id/itemList">
 
     <fragment
-        android:id="@+id/recipeListFragment"
+        android:id="@+id/itemList"
         android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.RecipeListFragment"
         android:label="RecipeListFragment" >
         <action
@@ -45,5 +45,13 @@
         <argument
             android:name="id"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemMyRecipes"
+        android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.MyRecipesFragment"
+        android:label="MyRecipesFragment" >
+        <action
+            android:id="@+id/actionRecipeDetail2"
+            app:destination="@id/recipeDetailFragment" />
     </fragment>
 </navigation>

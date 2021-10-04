@@ -27,7 +27,7 @@ class RecipeDetailFragment : Fragment() {
             var category = RecipeDetailFragmentArgs.fromBundle(requireArguments()).category
             var like = RecipeDetailFragmentArgs.fromBundle(requireArguments()).like
             var poster = RecipeDetailFragmentArgs.fromBundle(requireArguments()).poster
-            var id = RecipeDetailFragmentArgs.fromBundle(requireArguments()).id
+            var id_recipe = RecipeDetailFragmentArgs.fromBundle(requireArguments()).id
 
 
             txtNamaDetail.setText(name)
@@ -37,7 +37,7 @@ class RecipeDetailFragment : Fragment() {
         }
 
         btnIngredient.setOnClickListener {
-            val action = RecipeDetailFragmentDirections.actionIngredientList(id)
+            val action = RecipeDetailFragmentDirections.actionIngredientList(RecipeDetailFragmentArgs.fromBundle(requireArguments()).id)
             Navigation.findNavController(it).navigate(action)
         }
     }
