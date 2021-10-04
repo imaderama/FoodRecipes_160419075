@@ -33,19 +33,21 @@ class RecipeListAdapter(val recipeList:ArrayList<Recipe>):RecyclerView.Adapter<R
             imageView.loadImage(recipeList[position].poster.toString(), holder.view.progressBar)
             txtId.text = recipeList[position].recipe_id.toString()
 
+            val name = recipeList[position].name
+            val category = recipeList[position].category
+            val like = recipeList[position].likes
+            val poster = recipeList[position].poster
+            val id = recipeList[position].recipe_id
+
             btnDetails.setOnClickListener {
-                val name = recipeList[position].name
-                val category = recipeList[position].category
-                val like = recipeList[position].likes
-                val poster = recipeList[position].poster
-                val id = recipeList[position].recipe_id
+
                 val action = RecipeListFragmentDirections.actionRecipeDetail(name.toString(), category.toString(), like!!, poster.toString(), id!!
                 )
                 Navigation.findNavController(it).navigate(action)
             }
 
             btnShare.setOnClickListener {
-                val action = RecipeListFragmentDirections.actionOption2Fragment()
+                val action = RecipeListFragmentDirections.actionOptionFragment(name.toString(), like!!, poster.toString())
                 Navigation.findNavController(it).navigate(action)
             }
         }
