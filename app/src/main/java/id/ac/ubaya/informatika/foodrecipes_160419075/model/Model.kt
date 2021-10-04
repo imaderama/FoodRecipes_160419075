@@ -14,3 +14,10 @@ class Ingredient(
     val item:String?,
     val amount:String?
 )
+
+class Preparation(
+    val preparation_id:Int?,
+    val recipe_id_prep:Int?,
+    val step:Int?,
+    val description:String?
+)

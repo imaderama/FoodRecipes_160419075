@@ -31,6 +31,9 @@ class MyRecipesFragment : Fragment() {
         recView2.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recView2.adapter = myRecipeListAdapter
 
+        recView3.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recView3.adapter = myRecipeListAdapter
+
         SwipeRefreshLayout.setOnRefreshListener {
             recView2.visibility = View.GONE
             txtError4.visibility = View.GONE
@@ -60,10 +63,16 @@ class MyRecipesFragment : Fragment() {
             if(it){
                 progressBar4.visibility = View.VISIBLE
                 recView2.visibility = View.GONE
+                recView3.visibility = View.GONE
+                txtRecently.visibility = View.GONE
+                txtLikes.visibility = View.GONE
             }
             else{
                 progressBar4.visibility = View.GONE
                 recView2.visibility = View.VISIBLE
+                recView3.visibility = View.VISIBLE
+                txtRecently.visibility = View.VISIBLE
+                txtLikes.visibility = View.VISIBLE
             }
         })
     }

@@ -36,6 +36,9 @@
         <argument
             android:name="id"
             app:argType="integer" />
+        <action
+            android:id="@+id/actionPreparationList"
+            app:destination="@id/preparationListFragment" />
     </fragment>
     <fragment
         android:id="@+id/ingredientListFragment"
@@ -53,5 +56,14 @@
         <action
             android:id="@+id/actionRecipeDetail2"
             app:destination="@id/recipeDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/preparationListFragment"
+        android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.PreparationListFragment"
+        android:label="fragment_preparation_list"
+        tools:layout="@layout/fragment_preparation_list" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
 </navigation>

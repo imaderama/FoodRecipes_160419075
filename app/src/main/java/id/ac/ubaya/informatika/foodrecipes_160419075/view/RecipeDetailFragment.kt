@@ -40,5 +40,10 @@ class RecipeDetailFragment : Fragment() {
             val action = RecipeDetailFragmentDirections.actionIngredientList(RecipeDetailFragmentArgs.fromBundle(requireArguments()).id)
             Navigation.findNavController(it).navigate(action)
         }
+
+        btnPreparation.setOnClickListener {
+            val action = RecipeDetailFragmentDirections.actionPreparationList(RecipeDetailFragmentArgs.fromBundle(requireArguments()).id)
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 }

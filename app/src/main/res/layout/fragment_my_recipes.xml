@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintTop_toBottomOf="@+id/txtRecently" />
 
             <ProgressBar
                 android:id="@+id/progressBar4"
@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/txtRecently"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Recently Viewed"
@@ -56,7 +56,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/txtLikes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -66,6 +66,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recView2" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtLikes" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
