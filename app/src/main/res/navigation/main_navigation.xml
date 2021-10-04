@@ -12,6 +12,12 @@
         <action
             android:id="@+id/actionRecipeDetail"
             app:destination="@id/recipeDetailFragment" />
+        <action
+            android:id="@+id/actionOptionFragment"
+            app:destination="@id/optionFragment" />
+        <action
+            android:id="@+id/actionOption2Fragment"
+            app:destination="@id/option2Fragment" />
     </fragment>
     <fragment
         android:id="@+id/recipeDetailFragment"
@@ -66,4 +72,14 @@
             android:name="id"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/optionFragment"
+        android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.OptionFragment"
+        android:label="fragment_option"
+        tools:layout="@layout/fragment_option" />
+    <fragment
+        android:id="@+id/option2Fragment"
+        android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.Option2Fragment"
+        android:label="fragment_option2"
+        tools:layout="@layout/fragment_option2" />
 </navigation>

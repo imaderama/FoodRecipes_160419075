@@ -43,6 +43,11 @@ class RecipeListAdapter(val recipeList:ArrayList<Recipe>):RecyclerView.Adapter<R
                 )
                 Navigation.findNavController(it).navigate(action)
             }
+
+            btnShare.setOnClickListener {
+                val action = RecipeListFragmentDirections.actionOption2Fragment()
+                Navigation.findNavController(it).navigate(action)
+            }
         }
     }
 
