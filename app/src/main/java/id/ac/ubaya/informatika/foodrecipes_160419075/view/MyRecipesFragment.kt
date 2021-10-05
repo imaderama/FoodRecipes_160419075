@@ -9,13 +9,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
-import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.ListViewModel
+import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.MyRecipesViewModel
 import kotlinx.android.synthetic.main.fragment_my_recipes.*
-import kotlinx.android.synthetic.main.fragment_recipe_list.*
 
 class MyRecipesFragment : Fragment() {
-    private  lateinit var viewModel: ListViewModel
+    private  lateinit var viewModel: MyRecipesViewModel
     private val myRecipeListAdapter = MyRecipesAdapter(arrayListOf())
+    private  lateinit var viewModel2: MyRecipesViewModel
+    private val myRecipeListAdapter2 = MyRecipesAdapter(arrayListOf())
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -25,20 +26,24 @@ class MyRecipesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
-        viewModel.refresh()
+        viewModel = ViewModelProvider(this).get(MyRecipesViewModel::class.java)
+        viewModel.refresh("Breakfast")
+
+        viewModel2 = ViewModelProvider(this).get(MyRecipesViewModel::class.java)
+        viewModel2.refresh2("Dessert")
 
         recView2.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recView2.adapter = myRecipeListAdapter
 
         recView3.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recView3.adapter = myRecipeListAdapter
+        recView3.adapter = myRecipeListAdapter2
 
         SwipeRefreshLayout.setOnRefreshListener {
             recView2.visibility = View.GONE
-            txtError4.visibility = View.GONE
-            progressBar4.visibility = View.VISIBLE
-            viewModel.refresh()
+            txtErrorBF.visibility = View.GONE
+            progressBarBF.visibility = View.VISIBLE
+            viewModel.refresh("Breakfast")
+            viewModel2.refresh2("Dessert")
             SwipeRefreshLayout.isRefreshing = false
         }
 
@@ -50,29 +55,55 @@ class MyRecipesFragment : Fragment() {
             myRecipeListAdapter.updateRecipeList(it)
         })
 
+        viewModel2.recipesLD2.observe(viewLifecycleOwner, Observer {
+            myRecipeListAdapter2.updateRecipeList(it)
+        })
+
         viewModel.loadingErrorLD.observe(viewLifecycleOwner, Observer {
             if(it){
-                txtError4.visibility = View.VISIBLE
+                txtErrorBF.visibility = View.VISIBLE
             }
             else{
-                txtError4.visibility = View.GONE
+                txtErrorBF.visibility = View.GONE
             }
         })
 
         viewModel.loadingLD.observe(viewLifecycleOwner, Observer {
             if(it){
-                progressBar4.visibility = View.VISIBLE
+                progressBarBF.visibility = View.VISIBLE
                 recView2.visibility = View.GONE
-                recView3.visibility = View.GONE
-                txtRecently.visibility = View.GONE
-                txtLikes.visibility = View.GONE
+                txtBreakfast.visibility = View.GONE
+                txtDessert.visibility = View.GONE
             }
             else{
-                progressBar4.visibility = View.GONE
+                progressBarBF.visibility = View.GONE
                 recView2.visibility = View.VISIBLE
+                txtBreakfast.visibility = View.VISIBLE
+                txtDessert.visibility = View.VISIBLE
+            }
+        })
+
+        viewModel2.loadingErrorLD2.observe(viewLifecycleOwner, Observer {
+            if(it){
+                txtErrorDS.visibility = View.VISIBLE
+            }
+            else{
+                txtErrorDS.visibility = View.GONE
+            }
+        })
+
+        viewModel2.loadingLD2.observe(viewLifecycleOwner, Observer {
+            if(it){
+                progressBarDS.visibility = View.VISIBLE
+                recView3.visibility = View.GONE
+                txtBreakfast.visibility = View.GONE
+                txtDessert.visibility = View.GONE
+            }
+            else{
+                progressBarDS.visibility = View.GONE
                 recView3.visibility = View.VISIBLE
-                txtRecently.visibility = View.VISIBLE
-                txtLikes.visibility = View.VISIBLE
+                txtBreakfast.visibility = View.VISIBLE
+                txtDessert.visibility = View.VISIBLE
             }
         })
     }

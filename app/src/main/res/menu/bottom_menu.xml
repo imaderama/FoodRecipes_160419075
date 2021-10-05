@@ -13,8 +13,8 @@
         android:title="My Recipes"
         app:showAsAction="always" />
     <item
-        android:id="@+id/itemProfile"
-        android:icon="@drawable/ic_baseline_person_24"
-        android:title="Profile"
+        android:id="@+id/itemDiscover"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="Discover"
         app:showAsAction="always" />
 </menu>
