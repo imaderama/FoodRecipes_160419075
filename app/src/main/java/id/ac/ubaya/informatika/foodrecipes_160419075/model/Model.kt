@@ -21,3 +21,10 @@ class Preparation(
     val step:Int?,
     val description:String?
 )
+
+class Grocery(
+    val nama:String?,
+    val harga:Int?,
+    val jumlah:Int?,
+    val gambar:String?
+)

@@ -94,4 +94,8 @@
         android:id="@+id/itemDiscover"
         android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.DiscoverFragment"
         android:label="DiscoverFragment" />
+    <fragment
+        android:id="@+id/itemBag"
+        android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.BagFragment"
+        android:label="BagFragment" />
 </navigation>

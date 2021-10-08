@@ -14,7 +14,7 @@
     </group>
     <group android:id="@+id/menuBottom">
         <item
-            android:id="@+id/item"
-            android:title="Item" />
+            android:id="@+id/itemBag"
+            android:title="My Bag" />
     </group>
 </menu>
