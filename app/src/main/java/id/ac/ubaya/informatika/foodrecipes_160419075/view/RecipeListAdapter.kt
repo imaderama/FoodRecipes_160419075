@@ -7,13 +7,14 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipe
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipes
 import id.ac.ubaya.informatika.foodrecipes_160419075.util.loadImage
 import kotlinx.android.synthetic.main.recipe_list_item.view.*
 
-class RecipeListAdapter(val recipeList:ArrayList<Recipe>):RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>() {
+class RecipeListAdapter(val recipeList:ArrayList<Recipes>):RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>() {
     class RecipeViewHolder(val view: View):RecyclerView.ViewHolder(view)
 
-    fun updateRecipeList(newRecipeList:List<Recipe>){
+    fun updateRecipeList(newRecipeList:List<Recipes>){
         recipeList.clear()
         recipeList.addAll(newRecipeList)
         notifyDataSetChanged()

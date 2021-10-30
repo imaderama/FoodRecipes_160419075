@@ -45,7 +45,7 @@ class RecipeListFragment : Fragment() {
     }
 
     fun observeViewModel(){
-        viewModel.recipesLD.observe(viewLifecycleOwner, Observer {
+        viewModel.recipessLD.observe(viewLifecycleOwner, Observer {
             recipeListAdapter.updateRecipeList(it)
         })
 

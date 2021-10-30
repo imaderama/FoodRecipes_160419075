@@ -4,19 +4,36 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.room.Room
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.FoodRecipeDatabase
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipe
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipes
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class DetailViewModel(application: Application): AndroidViewModel(application)  {
+class DetailViewModel(application: Application): AndroidViewModel(application), CoroutineScope  {
+    private val job = Job()
     val recipeLD = MutableLiveData<Recipe>()
 
     private val TAG = "volleyTag"
     private var queue: RequestQueue?= null
+
+    fun addRecipe(recipes: Recipes){
+        launch {
+            val db = Room.databaseBuilder(getApplication(),
+                FoodRecipeDatabase::class.java, "foodrecipedb").build()
+            db.recipeDao().insertAll(recipes)
+        }
+    }
 
     fun fetch(url: String): String {
 //        val student1 = Student("16055","Nonie","1998/03/28","5718444778",
@@ -47,4 +64,7 @@ class DetailViewModel(application: Application): AndroidViewModel(application)  
         return recipeLD.value.toString()
 //        studentLD.value =
     }
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
 }

@@ -35,11 +35,14 @@ class MyRecipesFragment : Fragment() {
         recView2.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recView2.adapter = myRecipeListAdapter
 
-        recView3.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recView3.adapter = myRecipeListAdapter2
+        recViewDessert.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recViewDessert.adapter = myRecipeListAdapter2
+
+
 
         SwipeRefreshLayout.setOnRefreshListener {
             recView2.visibility = View.GONE
+            recViewDessert.visibility = View.GONE
             txtErrorBF.visibility = View.GONE
             progressBarBF.visibility = View.VISIBLE
             viewModel.refresh("Breakfast")
@@ -48,6 +51,9 @@ class MyRecipesFragment : Fragment() {
         }
 
         observeViewModel()
+
+//        txtDessert.visibility = View.GONE
+//        recViewDessert.visibility = View.GONE
     }
 
     fun observeViewModel(){
@@ -95,16 +101,18 @@ class MyRecipesFragment : Fragment() {
         viewModel2.loadingLD2.observe(viewLifecycleOwner, Observer {
             if(it){
                 progressBarDS.visibility = View.VISIBLE
-                recView3.visibility = View.GONE
+                recViewDessert.visibility = View.GONE
                 txtBreakfast.visibility = View.GONE
                 txtDessert.visibility = View.GONE
             }
             else{
                 progressBarDS.visibility = View.GONE
-                recView3.visibility = View.VISIBLE
+                recViewDessert.visibility = View.VISIBLE
                 txtBreakfast.visibility = View.VISIBLE
                 txtDessert.visibility = View.VISIBLE
             }
         })
+
+
     }
 }

@@ -1,5 +1,19 @@
 package id.ac.ubaya.informatika.foodrecipes_160419075.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class Recipes(
+    var name:String?,
+    var category: String?,
+    var likes:Int?,
+    var poster:String?
+){
+    @PrimaryKey(autoGenerate = true)
+    var recipe_id:Int = 0
+}
+
 data class Recipe(
     val recipe_id:Int?,
     val name:String?,
