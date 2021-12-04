@@ -11,9 +11,10 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipe
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipes
 
 class DiscoverViewModel(application: Application): AndroidViewModel(application) {
-    val recipesLD = MutableLiveData<List<Recipe>>()
+    val recipesLD = MutableLiveData<List<Recipes>>()
     val loadingErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
 
@@ -25,13 +26,13 @@ class DiscoverViewModel(application: Application): AndroidViewModel(application)
         loadingLD.value = true
 
         queue = Volley.newRequestQueue(getApplication())
-        var url = "http://ubaya.fun/hybrid/160419075/recipelist3.php"
+        var url = "https://ubaya.fun/hybrid/160419075/recipelist3.php"
         var stringRequest = object : StringRequest(
             Request.Method.POST,
             url,
             { response ->
-                val sType = object : TypeToken<List<Recipe>>() { }.type
-                val result = Gson().fromJson<List<Recipe>>(response, sType )
+                val sType = object : TypeToken<List<Recipes>>() { }.type
+                val result = Gson().fromJson<List<Recipes>>(response, sType )
                 recipesLD.value = result
 
                 loadingLD.value = false

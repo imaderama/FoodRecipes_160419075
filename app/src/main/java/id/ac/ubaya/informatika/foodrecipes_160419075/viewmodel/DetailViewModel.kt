@@ -22,7 +22,7 @@ import kotlin.coroutines.CoroutineContext
 
 class DetailViewModel(application: Application): AndroidViewModel(application), CoroutineScope  {
     private val job = Job()
-    val recipeLD = MutableLiveData<Recipe>()
+    val recipeLD = MutableLiveData<List<Recipes>>()
 
     private val TAG = "volleyTag"
     private var queue: RequestQueue?= null
@@ -35,19 +35,18 @@ class DetailViewModel(application: Application): AndroidViewModel(application), 
         }
     }
 
-    fun fetch(url: String): String {
+    fun fetch(id: Int): String {
 //        val student1 = Student("16055","Nonie","1998/03/28","5718444778",
 //                "http://dummyimage.com/75x100.jpg/cc0000/ffffff")
         queue = Volley.newRequestQueue(getApplication())
-//        var url = "http://adv.jitusolution.com/student.php?id=16055"
+        var url = "https://ubaya.fun/hybrid/160419075/recipedetail.php"
 
-        val stringRequest = StringRequest(
-            Request.Method.GET, url,
+        val stringRequest = object :  StringRequest(
+            Request.Method.POST,
+            url,
             { response ->
-                val sType = object : TypeToken<Recipe>() { }.type
-                val result = Gson().fromJson<Recipe>(response,
-                    Recipe::class.java)
-
+                val sType = object : TypeToken<List<Recipes>>() { }.type
+                val result = Gson().fromJson<List<Recipes>>(response, sType )
                 recipeLD.value = result
 
 //                    loadingLD.value = false
@@ -58,7 +57,15 @@ class DetailViewModel(application: Application): AndroidViewModel(application), 
 //                    loadingErrorLD.value = true
 //                    loadingLD.value = false
                 Log.d("singlevolley", it.toString())
-            })
+            }
+        ){
+            override fun getParams(): MutableMap<String, String> {
+                val params = HashMap<String, String>()
+//                Log.d("AmbilParam", "Dapat")
+                params["recipe_id"] = id.toString()
+                return params
+            }
+        }
         stringRequest.tag = TAG
         queue?.add(stringRequest)
         return recipeLD.value.toString()

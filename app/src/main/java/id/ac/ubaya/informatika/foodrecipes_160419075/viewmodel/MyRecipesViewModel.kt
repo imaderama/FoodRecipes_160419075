@@ -12,12 +12,13 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Preparation
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipe
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipes
 
 class MyRecipesViewModel(application: Application): AndroidViewModel(application) {
-    val recipesLD = MutableLiveData<List<Recipe>>()
+    val recipesLD = MutableLiveData<List<Recipes>>()
     val loadingErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
-    val recipesLD2 = MutableLiveData<List<Recipe>>()
+    val recipesLD2 = MutableLiveData<List<Recipes>>()
     val loadingErrorLD2 = MutableLiveData<Boolean>()
     val loadingLD2 = MutableLiveData<Boolean>()
 
@@ -29,13 +30,13 @@ class MyRecipesViewModel(application: Application): AndroidViewModel(application
         loadingLD.value = true
 
         queue = Volley.newRequestQueue(getApplication())
-        var url = "http://ubaya.fun/hybrid/160419075/recipelist4.php"
+        var url = "https://ubaya.fun/hybrid/160419075/recipelist4.php"
         var stringRequest = object : StringRequest(
                 Request.Method.POST,
                 url,
                 { response ->
-                    val sType = object : TypeToken<List<Recipe>>() { }.type
-                    val result = Gson().fromJson<List<Recipe>>(response, sType )
+                    val sType = object : TypeToken<List<Recipes>>() { }.type
+                    val result = Gson().fromJson<List<Recipes>>(response, sType )
                     recipesLD.value = result
 
                     loadingLD.value = false
@@ -65,13 +66,13 @@ class MyRecipesViewModel(application: Application): AndroidViewModel(application
         loadingLD2.value = true
 
         queue = Volley.newRequestQueue(getApplication())
-        var url = "http://ubaya.fun/hybrid/160419075/recipelist4.php"
+        var url = "https://ubaya.fun/hybrid/160419075/recipelist4.php"
         var stringRequest = object : StringRequest(
                 Request.Method.POST,
                 url,
                 { response ->
-                    val sType = object : TypeToken<List<Recipe>>() { }.type
-                    val result = Gson().fromJson<List<Recipe>>(response, sType )
+                    val sType = object : TypeToken<List<Recipes>>() { }.type
+                    val result = Gson().fromJson<List<Recipes>>(response, sType )
                     recipesLD2.value = result
 
                     loadingLD2.value = false

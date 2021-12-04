@@ -12,11 +12,12 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Ingredient
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.Ingredients
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipe
 import org.json.JSONObject
 
 class ListViewModelIngredient(application: Application): AndroidViewModel(application) {
-    val ingredentsLD = MutableLiveData<List<Ingredient>>()
+    val ingredentsLD = MutableLiveData<List<Ingredients>>()
     val loadingErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
 
@@ -28,7 +29,7 @@ class ListViewModelIngredient(application: Application): AndroidViewModel(applic
         loadingLD.value = true
 
         queue = Volley.newRequestQueue(getApplication())
-        var url = "http://ubaya.fun/hybrid/160419075/listingredient.php"
+        var url = "https://ubaya.fun/hybrid/160419075/listingredient.php"
 
 //        val stringRequest = object : StringRequest(Request.Method.GET, url,
 //                { response ->
@@ -56,8 +57,8 @@ class ListViewModelIngredient(application: Application): AndroidViewModel(applic
             Request.Method.POST,
             url,
             { response ->
-                    val sType = object : TypeToken<List<Ingredient>>() { }.type
-                    val result = Gson().fromJson<List<Ingredient>>(response, sType )
+                    val sType = object : TypeToken<List<Ingredients>>() { }.type
+                    val result = Gson().fromJson<List<Ingredients>>(response, sType )
                     ingredentsLD.value = result
 
                     loadingLD.value = false

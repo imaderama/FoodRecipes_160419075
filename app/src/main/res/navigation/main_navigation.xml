@@ -27,18 +27,6 @@
         android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.RecipeDetailFragment"
         android:label="fragment_recipe_detail"
         tools:layout="@layout/fragment_recipe_detail" >
-        <argument
-            android:name="name"
-            app:argType="string" />
-        <argument
-            android:name="category"
-            app:argType="string" />
-        <argument
-            android:name="like"
-            app:argType="integer" />
-        <argument
-            android:name="poster"
-            app:argType="string" />
         <action
             android:id="@+id/actionIngredientList"
             app:destination="@id/ingredientListFragment" />
@@ -81,14 +69,8 @@
         android:label="fragment_option"
         tools:layout="@layout/fragment_option" >
         <argument
-            android:name="nama"
-            app:argType="string" />
-        <argument
-            android:name="like"
+            android:name="id"
             app:argType="integer" />
-        <argument
-            android:name="poster"
-            app:argType="string" />
     </dialog>
     <fragment
         android:id="@+id/itemDiscover"

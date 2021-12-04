@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Ingredient
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Preparation
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.Preparations
 import kotlinx.android.synthetic.main.ingredient_list_item.view.*
 import kotlinx.android.synthetic.main.preparation_list_item.view.*
 
-class PreparationListAdapter(val preparationList:ArrayList<Preparation>): RecyclerView.Adapter<PreparationListAdapter.PreparationViewHolder>() {
+class PreparationListAdapter(val preparationList:ArrayList<Preparations>): RecyclerView.Adapter<PreparationListAdapter.PreparationViewHolder>() {
     class PreparationViewHolder(var view: View) : RecyclerView.ViewHolder(view)
 
-    fun updatePreparationList(newPreparationList:List<Preparation>){
+    fun updatePreparationList(newPreparationList:List<Preparations>){
         preparationList.clear()
         preparationList.addAll(newPreparationList)
         notifyDataSetChanged()

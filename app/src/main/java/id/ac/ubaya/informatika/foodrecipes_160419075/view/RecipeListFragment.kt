@@ -31,7 +31,7 @@ class RecipeListFragment : Fragment() {
 
         recView.layoutManager = LinearLayoutManager(context)
         recView.adapter = recipeListAdapter
-
+//
         refreshLayout.setOnRefreshListener {
             recView.visibility = View.GONE
             txtError.visibility = View.GONE

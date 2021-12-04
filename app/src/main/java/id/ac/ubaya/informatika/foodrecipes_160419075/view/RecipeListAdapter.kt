@@ -3,15 +3,18 @@ package id.ac.ubaya.informatika.foodrecipes_160419075.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
+import id.ac.ubaya.informatika.foodrecipes_160419075.databinding.RecipeListItemBinding
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipe
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipes
 import id.ac.ubaya.informatika.foodrecipes_160419075.util.loadImage
 import kotlinx.android.synthetic.main.recipe_list_item.view.*
 
-class RecipeListAdapter(val recipeList:ArrayList<Recipes>):RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>() {
+class RecipeListAdapter(val recipeList:ArrayList<Recipes>):RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder>()
+     {
     class RecipeViewHolder(val view: View):RecyclerView.ViewHolder(view)
 
     fun updateRecipeList(newRecipeList:List<Recipes>){
@@ -23,7 +26,8 @@ class RecipeListAdapter(val recipeList:ArrayList<Recipes>):RecyclerView.Adapter<
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val v = inflater.inflate(R.layout.recipe_list_item, parent, false)
-
+//        val v = DataBindingUtil.inflate<RecipeListItemBinding>(inflater,
+//            R.layout.recipe_list_item, parent, false)
         return RecipeViewHolder(v)
     }
 
@@ -34,21 +38,24 @@ class RecipeListAdapter(val recipeList:ArrayList<Recipes>):RecyclerView.Adapter<
             imageView.loadImage(recipeList[position].poster.toString(), holder.view.progressBar)
             txtId.text = recipeList[position].recipe_id.toString()
 
-            val name = recipeList[position].name
-            val category = recipeList[position].category
-            val like = recipeList[position].likes
-            val poster = recipeList[position].poster
+//            val name = recipeList[position].name
+//            val category = recipeList[position].category
+//            val like = recipeList[position].likes
+//            val poster = recipeList[position].poster
             val id = recipeList[position].recipe_id
+
+//            shareListener = this@RecipeListAdapter
+//            detailsListener = this@RecipeListAdapter
 
             btnDetails.setOnClickListener {
 
-                val action = RecipeListFragmentDirections.actionRecipeDetail(name.toString(), category.toString(), like!!, poster.toString(), id!!
+                val action = RecipeListFragmentDirections.actionRecipeDetail(id!!
                 )
                 Navigation.findNavController(it).navigate(action)
             }
 
             btnShare.setOnClickListener {
-                val action = RecipeListFragmentDirections.actionOptionFragment(name.toString(), like!!, poster.toString())
+                val action = RecipeListFragmentDirections.actionOptionFragment(id!!)
                 Navigation.findNavController(it).navigate(action)
             }
         }
@@ -57,4 +64,14 @@ class RecipeListAdapter(val recipeList:ArrayList<Recipes>):RecyclerView.Adapter<
     override fun getItemCount(): Int {
         return recipeList.size
     }
+
+//    override fun onRecipeDetailClick(v: View) {
+//        val action = RecipeListFragmentDirections.actionRecipeDetail(v.tag.toString().toInt())
+//        Navigation.findNavController(v).navigate(action)
+//    }
+//
+//    override fun onRecipeShareClick(v: View) {
+//        val action = RecipeListFragmentDirections.actionOptionFragment(v.tag.toString().toInt())
+//        Navigation.findNavController(v).navigate(action)
+//    }
 }

@@ -7,12 +7,13 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Ingredient
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.Ingredients
 import kotlinx.android.synthetic.main.ingredient_list_item.view.*
 
-class IngredientListAdapter(val ingredientList:ArrayList<Ingredient>): RecyclerView.Adapter<IngredientListAdapter.IngredientViewHolder>() {
+class IngredientListAdapter(val ingredientList:ArrayList<Ingredients>): RecyclerView.Adapter<IngredientListAdapter.IngredientViewHolder>() {
     class IngredientViewHolder(var view: View) : RecyclerView.ViewHolder(view)
 
-    fun updateIngredientList(newStudentList:List<Ingredient>){
+    fun updateIngredientList(newStudentList:List<Ingredients>){
         ingredientList.clear()
         ingredientList.addAll(newStudentList)
         notifyDataSetChanged()

@@ -24,7 +24,7 @@ import kotlin.coroutines.CoroutineContext
 class ListViewModel(application: Application):AndroidViewModel(application), CoroutineScope {
     val recipessLD = MutableLiveData<List<Recipes>>()
 
-    val recipesLD = MutableLiveData<List<Recipe>>()
+//    val recipesLD = MutableLiveData<List<Recipe>>()
     val loadingErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
     private var job = Job()
@@ -39,7 +39,7 @@ class ListViewModel(application: Application):AndroidViewModel(application), Cor
 
 
         queue = Volley.newRequestQueue(getApplication())
-        var url = "http://ubaya.fun/hybrid/160419075/recipelist3.php"
+        var url = "https://ubaya.fun/hybrid/160419075/recipelist3.php"
 
         val stringRequest = StringRequest(
             Request.Method.GET, url,

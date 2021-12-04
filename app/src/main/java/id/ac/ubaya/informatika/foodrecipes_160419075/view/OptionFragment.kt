@@ -23,14 +23,14 @@ class OptionFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if(arguments!=null){
-            var name = OptionFragmentArgs.fromBundle(requireArguments()).nama
-            var like = OptionFragmentArgs.fromBundle(requireArguments()).like
-            var poster = OptionFragmentArgs.fromBundle(requireArguments()).poster
+//            var name = OptionFragmentArgs.fromBundle(requireArguments()).nama
+//            var like = OptionFragmentArgs.fromBundle(requireArguments()).like
+//            var poster = OptionFragmentArgs.fromBundle(requireArguments()).poster
 
 
-            txtNamaOption.setText(name)
-            txtLikeOption.setText(like.toString() + " people like this recipe")
-            imageView4.loadImage(poster, progressBar7)
+//            txtNamaOption.setText(name)
+//            txtLikeOption.setText(like.toString() + " people like this recipe")
+//            imageView4.loadImage(poster, progressBar7)
         }
     }
 }

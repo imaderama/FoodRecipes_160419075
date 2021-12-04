@@ -12,9 +12,10 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Ingredient
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Preparation
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.Preparations
 
 class ListViewModelPreparation(application: Application): AndroidViewModel(application) {
-    val preparationsLD = MutableLiveData<List<Preparation>>()
+    val preparationsLD = MutableLiveData<List<Preparations>>()
     val loadingErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
 
@@ -26,13 +27,13 @@ class ListViewModelPreparation(application: Application): AndroidViewModel(appli
         loadingLD.value = true
 
         queue = Volley.newRequestQueue(getApplication())
-        var url = "http://ubaya.fun/hybrid/160419075/listpreparation.php"
+        var url = "https://ubaya.fun/hybrid/160419075/listpreparation.php"
         var stringRequest = object : StringRequest(
             Request.Method.POST,
             url,
             { response ->
-                val sType = object : TypeToken<List<Preparation>>() { }.type
-                val result = Gson().fromJson<List<Preparation>>(response, sType )
+                val sType = object : TypeToken<List<Preparations>>() { }.type
+                val result = Gson().fromJson<List<Preparations>>(response, sType )
                 preparationsLD.value = result
 
                 loadingLD.value = false
