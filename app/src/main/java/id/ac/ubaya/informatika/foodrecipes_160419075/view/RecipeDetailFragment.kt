@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.squareup.picasso.Picasso
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
 import id.ac.ubaya.informatika.foodrecipes_160419075.databinding.FragmentRecipeDetailBinding
 import id.ac.ubaya.informatika.foodrecipes_160419075.util.loadImage
@@ -50,6 +51,7 @@ class RecipeDetailFragment : Fragment() {
 //            txtLike.setText(like.toString())
 //            imageView2.loadImage(poster, progressBar2)
 //        }
+//        Picasso.get().load("https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg").into(imageView2)
 
         btnIngredient.setOnClickListener {
             val action = RecipeDetailFragmentDirections.actionIngredientList(RecipeDetailFragmentArgs.fromBundle(requireArguments()).id)
@@ -65,6 +67,8 @@ class RecipeDetailFragment : Fragment() {
     fun observeViewModel() {
         viewModel.recipeLD.observe(viewLifecycleOwner, Observer {
             dataBinding.recipe = it[0]
+            dataBinding.imageUrl = it[0].poster.toString()
+//            imageView2.loadImage(it[0].poster.toString(), progressBar2)
         })
     }
 }

@@ -75,7 +75,11 @@
     <fragment
         android:id="@+id/itemDiscover"
         android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.DiscoverFragment"
-        android:label="DiscoverFragment" />
+        android:label="DiscoverFragment" >
+        <action
+            android:id="@+id/actionToRecipeDetail"
+            app:destination="@id/recipeDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/itemBag"
         android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.BagFragment"

@@ -1,37 +1,25 @@
 package id.ac.ubaya.informatika.foodrecipes_160419075.view
 
+import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+//import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
+import id.ac.ubaya.informatika.foodrecipes_160419075.util.loadImage
 import java.lang.Exception
 
 interface RecipeDetailClickListener {
     fun onRecipeDetailClick(v: View)
 }
 
+interface ImageViewClickListener {
+    fun onImageViewClick(v: View)
+}
+
 interface RecipeShareClickListener {
     fun onRecipeShareClick(v: View)
 }
 
-//interface ImageViewLoad {
-//    fun ImageView.loadImage(url:String, progressBar: ProgressBar){
-//        Picasso.get()
-//            .load(url)
-//            .resize(400,400)
-//            .centerCrop()
-//            .error(R.drawable.ic_baseline_error_24)
-//            .into(this, object: Callback {
-//                override fun onSuccess() {
-//                    progressBar.visibility = View.GONE
-//                }
-//
-//                override fun onError(e: Exception?) {
-//
-//                }
-//
-//            })
-//    }
-//}

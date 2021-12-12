@@ -7,6 +7,7 @@ import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
@@ -40,4 +41,24 @@ fun ImageView.loadImage(url:String, progressBar: ProgressBar){
             }
 
         })
+}
+
+@BindingAdapter("loadWithPicasso")
+fun loadWithPicasso(imageView2: ImageView, imageUrl: String? ) {
+    Picasso.get()
+        .load(imageUrl)
+        .resize(400,400)
+        .centerCrop()
+        .error(R.drawable.ic_baseline_error_24)
+        .into(imageView2, object: Callback {
+            override fun onSuccess() {
+//                progressBar.visibility = View.GONE
+            }
+
+            override fun onError(e: Exception?) {
+
+            }
+
+        })
+//    Picasso.get().load(imageUrl).into(imageView2)
 }

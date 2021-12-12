@@ -12,9 +12,5 @@
             android:id="@+id/itemDiscover"
             android:title="Discover" />
     </group>
-    <group android:id="@+id/menuBottom">
-        <item
-            android:id="@+id/itemBag"
-            android:title="My Bag" />
-    </group>
+    <group android:id="@+id/menuBottom"/>
 </menu>
