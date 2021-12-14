@@ -71,7 +71,7 @@ class ListViewModel(application: Application):AndroidViewModel(application), Cor
             val db = Room.databaseBuilder(getApplication(),
                 FoodRecipeDatabase::class.java, "foodrecipedb").build()
 //            db.recipeDao().insertAll()
-            recipessLD.value = db.recipeDao().selectAllRecipe()
+            recipessLD.value = db.recipeDao().selectAllRecipePublic()
 
             loadingLD.value = false
         }
@@ -81,7 +81,7 @@ class ListViewModel(application: Application):AndroidViewModel(application), Cor
         launch {
             val db = Room.databaseBuilder(getApplication(),
                 FoodRecipeDatabase::class.java, "foodrecipedb").build()
-            recipessLD.value = db.recipeDao().selectAllRecipe()
+            recipessLD.value = db.recipeDao().selectAllRecipePublic()
         }
     }
 

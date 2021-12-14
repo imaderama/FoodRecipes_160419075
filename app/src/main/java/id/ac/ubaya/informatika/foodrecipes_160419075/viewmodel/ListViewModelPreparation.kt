@@ -10,8 +10,6 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import id.ac.ubaya.informatika.foodrecipes_160419075.model.Ingredient
-import id.ac.ubaya.informatika.foodrecipes_160419075.model.Preparation
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Preparations
 
 class ListViewModelPreparation(application: Application): AndroidViewModel(application) {

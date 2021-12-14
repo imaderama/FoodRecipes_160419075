@@ -17,7 +17,6 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
-import id.ac.ubaya.informatika.foodrecipes_160419075.model.Preparation
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.json.JSONObject
 

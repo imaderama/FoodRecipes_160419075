@@ -84,4 +84,16 @@
         android:id="@+id/itemBag"
         android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.BagFragment"
         android:label="BagFragment" />
+    <fragment
+        android:id="@+id/itemCreateRecipe"
+        android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.CreateFragment"
+        android:label="CreateFragment" >
+        <action
+            android:id="@+id/actionCreatePrepAndIng"
+            app:destination="@id/createPrepAndIngFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPrepAndIngFragment"
+        android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.CreatePrepAndIngFragment"
+        android:label="CreatePrepAndIngFragment" />
 </navigation>

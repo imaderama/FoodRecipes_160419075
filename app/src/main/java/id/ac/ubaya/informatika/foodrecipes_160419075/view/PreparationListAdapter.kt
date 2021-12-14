@@ -5,8 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
-import id.ac.ubaya.informatika.foodrecipes_160419075.model.Ingredient
-import id.ac.ubaya.informatika.foodrecipes_160419075.model.Preparation
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Preparations
 import kotlinx.android.synthetic.main.ingredient_list_item.view.*
 import kotlinx.android.synthetic.main.preparation_list_item.view.*

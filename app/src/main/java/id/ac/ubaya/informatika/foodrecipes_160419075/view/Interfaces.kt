@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.MyRecipes
 import id.ac.ubaya.informatika.foodrecipes_160419075.util.loadImage
 import java.lang.Exception
 
@@ -21,5 +22,17 @@ interface ImageViewClickListener {
 
 interface RecipeShareClickListener {
     fun onRecipeShareClick(v: View)
+}
+
+interface ButtonAddClickListener {
+    fun onButtonAddClick(v: View)
+}
+
+interface RadioClickListener {
+    fun onRadioClick(v: View, category:Int, obj:MyRecipes)
+}
+
+interface TextChangedListener {
+    fun onTextChanged(s: CharSequence)
 }
 

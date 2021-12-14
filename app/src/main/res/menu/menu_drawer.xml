@@ -12,5 +12,9 @@
             android:id="@+id/itemDiscover"
             android:title="Discover" />
     </group>
-    <group android:id="@+id/menuBottom"/>
+    <group android:id="@+id/menuBottom">
+        <item
+            android:id="@+id/itemCreateRecipe"
+            android:title="Create Recipe" />
+    </group>
 </menu>

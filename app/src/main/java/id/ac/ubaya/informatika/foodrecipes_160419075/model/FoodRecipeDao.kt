@@ -13,8 +13,11 @@ interface FoodRecipeDao {
     @Insert
     suspend fun insertAllRecipes(recipes:List<Recipes>)
 
-    @Query("SELECT * FROM recipes")
-    suspend fun selectAllRecipe():List<Recipes>
+    @Query("SELECT * FROM recipes WHERE public_stat = 1")
+    suspend fun selectAllRecipePublic():List<Recipes>
+
+    @Query("SELECT * FROM recipes WHERE public_stat = 0")
+    suspend fun selectAllRecipeUnPublic():List<Recipes>
 
     @Query("SELECT * FROM recipes WHERE recipe_id = :id")
     suspend fun selectRecipe(id:Int):Recipes
@@ -24,4 +27,55 @@ interface FoodRecipeDao {
 
     @Delete
     suspend fun deleteRecipe(recipes:List<Recipes>)
+
+    @Insert
+    suspend fun insertAllMyRecipe(myRecipes: MyRecipes)
+
+    @Insert
+    suspend fun insertAllMyRecipes(myRecipes:List<MyRecipes>)
+
+    @Query("SELECT * FROM myrecipes")
+    suspend fun selectAllMyRecipes():List<MyRecipes>
+
+    @Query("SELECT * FROM myrecipes WHERE recipe_id = :id")
+    suspend fun selectMyRecipes(id:Int):MyRecipes
+
+//    @Query("SELECT recipe_id FROM myrecipes WHERE name = :name AND poster = :poster")
+//    suspend fun selectIDMyRecipe(name:String, poster: String):MyRecipes
+
+    @Query("UPDATE myrecipes SET name=:name, category=:category, poster=:poster WHERE recipe_id=:uuid")
+    suspend fun updateMyRecipe(name:String, category:String, poster:String, uuid: Int)
+
+    @Delete
+    suspend fun deleteMyRecipes(myRecipes: MyRecipes)
+
+    @Delete
+    suspend fun deleteMyRecipes(myRecipes: List<MyRecipes>)
+
+    @Insert
+    suspend fun insertAllPreparation(preparations: Preparations)
+
+    @Insert
+    suspend fun insertAllPreparations(preparations: List<Preparations>)
+
+    @Query("SELECT * FROM preparations")
+    suspend fun selectAllPreparation():List<Preparations>
+
+    @Query("SELECT * FROM preparations WHERE recipe_id_prep = :id")
+    suspend fun selectPreparation(id:Int):Preparations
+
+    @Insert
+    suspend fun insertAllIngredient(ingredients: Ingredients)
+
+    @Insert
+    suspend fun insertAllIngredients(ingredients: List<Ingredients>)
+
+    @Query("SELECT * FROM ingredients")
+    suspend fun selectAllIngredient():List<Ingredients>
+
+    @Query("UPDATE ingredients SET item=:category, amount=:poster WHERE ingredient_id=:uuid")
+    suspend fun updateIngredient(category:String, poster:String, uuid: Int)
+
+    @Query("SELECT * FROM ingredients WHERE recipe_id_ing = :id")
+    suspend fun selectIngredient(id:Int):Ingredients
 }
