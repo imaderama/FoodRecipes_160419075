@@ -9,6 +9,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.MyRecipes
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipes
 import id.ac.ubaya.informatika.foodrecipes_160419075.util.loadImage
 import java.lang.Exception
 
@@ -20,6 +21,14 @@ interface ImageViewClickListener {
     fun onImageViewClick(v: View)
 }
 
+interface ButtonEditClickListener {
+    fun onButtonEditClick(v: View)
+}
+
+interface ButtonPIClickListener {
+    fun onButtonPIClick(v: View)
+}
+
 interface RecipeShareClickListener {
     fun onRecipeShareClick(v: View)
 }
@@ -29,7 +38,11 @@ interface ButtonAddClickListener {
 }
 
 interface RadioClickListener {
-    fun onRadioClick(v: View, category:Int, obj:MyRecipes)
+    fun onRadioClick(v: View, category:String, obj:Recipes)
+}
+
+interface RadioCheckListener {
+    fun onRadioCheck(v: View, category:String, obj:MyRecipes)
 }
 
 interface TextChangedListener {

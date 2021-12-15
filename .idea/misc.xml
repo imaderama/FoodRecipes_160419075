@@ -4,11 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android Studio/FoodRecipes_160419075/app/src/main/res/layout/fragment_bag.xml" value="0.23641304347826086" />
-        <entry key="..\:/Android Studio/FoodRecipes_160419075/app/src/main/res/layout/fragment_create.xml" value="0.33" />
+        <entry key="..\:/Android Studio/FoodRecipes_160419075/app/src/main/res/layout/fragment_create.xml" value="0.25" />
         <entry key="..\:/Android Studio/FoodRecipes_160419075/app/src/main/res/layout/fragment_create_prep_and_ing.xml" value="0.22" />
         <entry key="..\:/Android Studio/FoodRecipes_160419075/app/src/main/res/layout/fragment_discover.xml" value="0.23641304347826086" />
         <entry key="..\:/Android Studio/FoodRecipes_160419075/app/src/main/res/layout/fragment_login.xml" value="0.23641304347826086" />
-        <entry key="..\:/Android Studio/FoodRecipes_160419075/app/src/main/res/layout/fragment_my_recipes.xml" value="0.16" />
+        <entry key="..\:/Android Studio/FoodRecipes_160419075/app/src/main/res/layout/fragment_my_recipes.xml" value="0.33" />
         <entry key="..\:/Android Studio/FoodRecipes_160419075/app/src/main/res/layout/fragment_option.xml" value="0.23641304347826086" />
         <entry key="..\:/Android Studio/FoodRecipes_160419075/app/src/main/res/layout/fragment_preparation_list.xml" value="0.23641304347826086" />
         <entry key="..\:/Android Studio/FoodRecipes_160419075/app/src/main/res/layout/fragment_recipe_detail.xml" value="0.23641304347826086" />

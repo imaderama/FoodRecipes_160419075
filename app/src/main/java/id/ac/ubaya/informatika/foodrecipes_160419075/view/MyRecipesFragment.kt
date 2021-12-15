@@ -27,26 +27,26 @@ class MyRecipesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(MyRecipesViewModel::class.java)
-        viewModel.refresh("Breakfast")
+        viewModel.refresh()
 
         viewModel2 = ViewModelProvider(this).get(MyRecipesViewModel::class.java)
-        viewModel2.refresh2("Dessert")
+        viewModel2.refresh2()
 
-        recView2.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recView2.adapter = myRecipeListAdapter
+        recViewMyRecipe.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recViewMyRecipe.adapter = myRecipeListAdapter
 
-        recViewDessert.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recViewDessert.adapter = myRecipeListAdapter2
+        recViewDraft.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recViewDraft.adapter = myRecipeListAdapter2
 
 
 
         SwipeRefreshLayout.setOnRefreshListener {
-            recView2.visibility = View.GONE
-            recViewDessert.visibility = View.GONE
-            txtErrorBF.visibility = View.GONE
+            recViewMyRecipe.visibility = View.GONE
+            recViewDraft.visibility = View.GONE
+            txtErrorMyRecipe.visibility = View.GONE
             progressBarBF.visibility = View.VISIBLE
-            viewModel.refresh("Breakfast")
-            viewModel2.refresh2("Dessert")
+            viewModel.refresh()
+            viewModel2.refresh2()
             SwipeRefreshLayout.isRefreshing = false
         }
 
@@ -61,55 +61,56 @@ class MyRecipesFragment : Fragment() {
             myRecipeListAdapter.updateRecipeList(it)
         })
 
-        viewModel2.recipesLD2.observe(viewLifecycleOwner, Observer {
+        viewModel2.recipesDraftLD.observe(viewLifecycleOwner, Observer {
             myRecipeListAdapter2.updateRecipeList(it)
         })
 
         viewModel.loadingErrorLD.observe(viewLifecycleOwner, Observer {
             if(it){
-                txtErrorBF.visibility = View.VISIBLE
+                txtErrorMyRecipe.visibility = View.VISIBLE
             }
             else{
-                txtErrorBF.visibility = View.GONE
+                txtErrorMyRecipe.visibility = View.GONE
             }
         })
 
         viewModel.loadingLD.observe(viewLifecycleOwner, Observer {
             if(it){
                 progressBarBF.visibility = View.VISIBLE
-                recView2.visibility = View.GONE
-                txtBreakfast.visibility = View.GONE
-                txtDessert.visibility = View.GONE
+                recViewMyRecipe.visibility = View.GONE
+                txtMyRecipe.visibility = View.GONE
+                txtDraft.visibility = View.GONE
             }
             else{
                 progressBarBF.visibility = View.GONE
-                recView2.visibility = View.VISIBLE
-                txtBreakfast.visibility = View.VISIBLE
-                txtDessert.visibility = View.VISIBLE
+                recViewMyRecipe.visibility = View.VISIBLE
+                txtMyRecipe.visibility = View.VISIBLE
+                txtDraft.visibility = View.VISIBLE
             }
         })
 
-        viewModel2.loadingErrorLD2.observe(viewLifecycleOwner, Observer {
+        viewModel2.loadingErrorDraftLD.observe(viewLifecycleOwner, Observer {
             if(it){
-                txtErrorDS.visibility = View.VISIBLE
+                txtErrorDraft.visibility = View.VISIBLE
             }
             else{
-                txtErrorDS.visibility = View.GONE
+                txtErrorDraft.visibility = View.GONE
             }
         })
 
-        viewModel2.loadingLD2.observe(viewLifecycleOwner, Observer {
+        viewModel2.loadingDraftLD.observe(viewLifecycleOwner, Observer {
             if(it){
                 progressBarDS.visibility = View.VISIBLE
-                recViewDessert.visibility = View.GONE
-                txtBreakfast.visibility = View.GONE
-                txtDessert.visibility = View.GONE
+                txtErrorDraft.visibility = View.GONE
+                recViewDraft.visibility = View.GONE
+                txtMyRecipe.visibility = View.GONE
+                txtDraft.visibility = View.GONE
             }
             else{
                 progressBarDS.visibility = View.GONE
-                recViewDessert.visibility = View.VISIBLE
-                txtBreakfast.visibility = View.VISIBLE
-                txtDessert.visibility = View.VISIBLE
+                recViewDraft.visibility = View.VISIBLE
+                txtMyRecipe.visibility = View.VISIBLE
+                txtDraft.visibility = View.VISIBLE
             }
         })
 

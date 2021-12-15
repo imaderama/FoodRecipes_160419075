@@ -4,13 +4,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="myrecipe"
-            type="id.ac.ubaya.informatika.foodrecipes_160419075.model.MyRecipes" />
+            name="recipe"
+            type="id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipes" />
         <variable
             name="listener"
             type="id.ac.ubaya.informatika.foodrecipes_160419075.view.ButtonAddClickListener" />
         <variable
             name="ingredient"
+            type="String" />
+        <variable
+            name="breakfast"
+            type="String" />
+        <variable
+            name="dessert"
+            type="String" />
+        <variable
+            name="dinner"
+            type="String" />
+        <variable
+            name="drink"
             type="String" />
         <variable name="radiolistener" type="id.ac.ubaya.informatika.foodrecipes_160419075.view.RadioClickListener" />
     </data>
@@ -74,7 +86,7 @@
                         android:id="@+id/txtRecipeName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@={myrecipe.name}"/>
+                        android:text="@={recipe.name}"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -96,7 +108,7 @@
                         android:id="@+id/txtLinkPicture"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@={myrecipe.poster}"/>
+                        android:text="@={recipe.poster}"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <RadioGroup
@@ -111,36 +123,36 @@
                         android:id="@+id/radioButtonBreakfast"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:tag="4"
-                        android:checked="@{myrecipe.category==4?true:false}"
-                        android:onClick="@{(view) -> radiolistener.onRadioClick(view, 4, myrecipe)}"
+                        android:tag="Breakfast"
+                        android:checked= "@{recipe.category==breakfast?true:false}"
+                        android:onClick="@{(view) -> radiolistener.onRadioClick(view, breakfast, recipe)}"
                         android:text="Breakfast" />
 
                     <RadioButton
                         android:id="@+id/radioButtonDessert"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:tag="3"
-                        android:checked="@{myrecipe.category==3?true:false}"
-                        android:onClick="@{(view) -> radiolistener.onRadioClick(view, 3, myrecipe)}"
+                        android:tag="Dessert"
+                        android:checked="@{recipe.category==dessert?true:false}"
+                        android:onClick="@{(view) -> radiolistener.onRadioClick(view, dessert, recipe)}"
                         android:text="Dessert" />
 
                     <RadioButton
                         android:id="@+id/radioButtonDinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:tag="2"
-                        android:checked="@{myrecipe.category==2?true:false}"
-                        android:onClick="@{(view) -> radiolistener.onRadioClick(view, 2, myrecipe)}"
+                        android:tag="Dinner"
+                        android:checked="@{recipe.category==dinner?true:false}"
+                        android:onClick="@{(view) -> radiolistener.onRadioClick(view, dinner, recipe)}"
                         android:text="Dinner" />
 
                     <RadioButton
                         android:id="@+id/radioButtonDrink"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:tag="1"
-                        android:checked="@{myrecipe.category==1?true:false}"
-                        android:onClick="@{(view) -> radiolistener.onRadioClick(view, 1, myrecipe)}"
+                        android:tag="Drink"
+                        android:checked="@{recipe.category==drink?true:false}"
+                        android:onClick="@{(view) -> radiolistener.onRadioClick(view, drink, recipe)}"
                         android:text="Drink" />
                 </RadioGroup>
 

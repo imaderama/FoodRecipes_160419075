@@ -46,13 +46,15 @@ class ListViewModel(application: Application):AndroidViewModel(application), Cor
             { response ->
                 val sType = object : TypeToken<List<Recipes>>() { }.type
                 val result = Gson().fromJson<List<Recipes>>(response, sType )
-                recipessLD.value = result
+//                recipessLD.value = result
 
                 launch {
                     val db = Room.databaseBuilder(getApplication(),
                         FoodRecipeDatabase::class.java, "foodrecipedb").build()
                     db.recipeDao().deleteRecipe(result)
+                    db.recipeDao().deleteAllRecipe()
                     db.recipeDao().insertAllRecipes(result)
+                    recipessLD.value = db.recipeDao().selectAllRecipePublic()
                 }
                 loadingLD.value = false
                 Log.d("showvolley", response.toString())
@@ -67,14 +69,14 @@ class ListViewModel(application: Application):AndroidViewModel(application), Cor
         stringRequest.tag = TAG
         queue?.add(stringRequest)
 
-        launch {
-            val db = Room.databaseBuilder(getApplication(),
-                FoodRecipeDatabase::class.java, "foodrecipedb").build()
-//            db.recipeDao().insertAll()
-            recipessLD.value = db.recipeDao().selectAllRecipePublic()
-
-            loadingLD.value = false
-        }
+//        launch {
+//            val db = Room.databaseBuilder(getApplication(),
+//                FoodRecipeDatabase::class.java, "foodrecipedb").build()
+////            db.recipeDao().insertAll()
+//
+//
+//            loadingLD.value = false
+//        }
     }
 
     fun clearRecipe(recipes: Recipes) {

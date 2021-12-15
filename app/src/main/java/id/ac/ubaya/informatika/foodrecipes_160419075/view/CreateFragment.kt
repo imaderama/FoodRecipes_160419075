@@ -15,6 +15,7 @@ import id.ac.ubaya.informatika.foodrecipes_160419075.R
 import id.ac.ubaya.informatika.foodrecipes_160419075.databinding.FragmentCreateBinding
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Ingredients
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.MyRecipes
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipes
 import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.DetailRecipeViewModelViewModel
 import kotlinx.android.synthetic.main.fragment_create.*
 
@@ -36,9 +37,14 @@ class CreateFragment : Fragment(), ButtonAddClickListener, RadioClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(DetailRecipeViewModelViewModel::class.java)
-        dataBinding.myrecipe = MyRecipes("",4,0,"")
+//        dataBinding.myrecipe = MyRecipes("",4,0,"")
+        dataBinding.recipe = Recipes("","",0,"",0)
         dataBinding.listener = this
         dataBinding.radiolistener = this
+        dataBinding.breakfast = "Breakfast"
+        dataBinding.dessert = "Dessert"
+        dataBinding.dinner = "Dinner"
+        dataBinding.drink = "Drink"
 //        dataBinding.ingredient = this.toString()
 //        dataBinding.ingredients = Ingredients(1,"","")
 //        text = dataBinding.ingredients!!.item.toString()
@@ -46,6 +52,7 @@ class CreateFragment : Fragment(), ButtonAddClickListener, RadioClickListener {
     }
 
     override fun onButtonAddClick(v: View) {
+
 //        dataBinding.ingredient = this.
 //        observeViewModel()
 //        val test = "1.Pertama;2.Kedua;3.Ketiga;4.Keempat"
@@ -54,10 +61,15 @@ class CreateFragment : Fragment(), ButtonAddClickListener, RadioClickListener {
         AlertDialog.Builder(context).apply {
             setMessage("You want to add this recipe?")
             setPositiveButton("Yes") { _, _ ->
-                viewModel.addRecipe(dataBinding.myrecipe!!)
+
+                viewModel.addRecipe(dataBinding.recipe!!)
+//                viewModel.selectLastRecipe()
+
+//                viewModel.deleteAllMyRecipe(4)
+//                viewModel.deleteAllMyRecipe(10)
                 Toast.makeText(
                     context,
-                    dataBinding.myrecipe!!.toString(),
+                    dataBinding.recipe!!.toString(),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -67,8 +79,8 @@ class CreateFragment : Fragment(), ButtonAddClickListener, RadioClickListener {
         }
     }
 
-    override fun onRadioClick(v: View, category: Int, obj: MyRecipes) {
-        obj.category = v.tag.toString().toInt()
+    override fun onRadioClick(v: View, category: String, obj: Recipes) {
+        obj.category = v.tag.toString()
     }
 
 //    override fun onTextChanged(s: CharSequence) {

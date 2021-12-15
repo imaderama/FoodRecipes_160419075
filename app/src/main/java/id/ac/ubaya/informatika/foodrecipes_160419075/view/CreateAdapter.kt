@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Grocery
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipes
 import id.ac.ubaya.informatika.foodrecipes_160419075.util.loadImage
 import kotlinx.android.synthetic.main.fragment_create.view.*
 import kotlinx.android.synthetic.main.grocery_bag_item.view.*
 
-class CreateAdapter(val groceryList:ArrayList<Grocery>): RecyclerView.Adapter<CreateAdapter.GroceryViewHolder>() {
+class CreateAdapter(val recipe:ArrayList<Recipes>): RecyclerView.Adapter<CreateAdapter.GroceryViewHolder>() {
     class GroceryViewHolder(val view: View): RecyclerView.ViewHolder(view)
 
 //    fun updateBahanList(newGroceryList:List<Grocery>){
@@ -31,6 +32,6 @@ class CreateAdapter(val groceryList:ArrayList<Grocery>): RecyclerView.Adapter<Cr
     }
 
     override fun getItemCount(): Int {
-        return groceryList.size
+        return recipe.size
     }
 }

@@ -53,6 +53,9 @@
         <action
             android:id="@+id/actionRecipeDetail2"
             app:destination="@id/recipeDetailFragment" />
+        <action
+            android:id="@+id/actionCreatePIFragment"
+            app:destination="@id/createPrepAndIngFragment" />
     </fragment>
     <fragment
         android:id="@+id/preparationListFragment"
@@ -87,13 +90,13 @@
     <fragment
         android:id="@+id/itemCreateRecipe"
         android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.CreateFragment"
-        android:label="CreateFragment" >
-        <action
-            android:id="@+id/actionCreatePrepAndIng"
-            app:destination="@id/createPrepAndIngFragment" />
-    </fragment>
+        android:label="CreateFragment" />
     <fragment
         android:id="@+id/createPrepAndIngFragment"
         android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.CreatePrepAndIngFragment"
-        android:label="CreatePrepAndIngFragment" />
+        android:label="CreatePrepAndIngFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

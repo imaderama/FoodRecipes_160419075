@@ -22,11 +22,22 @@ interface FoodRecipeDao {
     @Query("SELECT * FROM recipes WHERE recipe_id = :id")
     suspend fun selectRecipe(id:Int):Recipes
 
+    @Query("SELECT * FROM recipes ORDER BY recipe_id DESC LIMIT 1 ")
+    suspend fun selectLastRecipe():Recipes
+
     @Delete
     suspend fun deleteRecipe(recipes: Recipes)
 
+    @Query("DELETE FROM recipes WHERE recipe_id = :id")
+    suspend fun deleteRecipe(id: Int)
+
+    @Query("DELETE FROM recipes")
+    suspend fun deleteAllRecipe()
+
     @Delete
     suspend fun deleteRecipe(recipes:List<Recipes>)
+
+    //
 
     @Insert
     suspend fun insertAllMyRecipe(myRecipes: MyRecipes)
@@ -46,11 +57,39 @@ interface FoodRecipeDao {
     @Query("UPDATE myrecipes SET name=:name, category=:category, poster=:poster WHERE recipe_id=:uuid")
     suspend fun updateMyRecipe(name:String, category:String, poster:String, uuid: Int)
 
+    @Query("DELETE FROM myrecipes")
+    suspend fun deleteAllMyRecipe()
+
     @Delete
     suspend fun deleteMyRecipes(myRecipes: MyRecipes)
 
     @Delete
     suspend fun deleteMyRecipes(myRecipes: List<MyRecipes>)
+
+    //
+
+    @Insert
+    suspend fun insertAllRecipeDraft(recipesDraft: RecipesDraft)
+
+    @Insert
+    suspend fun insertAllRecipesDraft(recipesDraft: List<RecipesDraft>)
+
+    @Query("SELECT * FROM recipesdraft")
+    suspend fun selectAllRecipesDraft():List<RecipesDraft>
+
+    @Query("SELECT * FROM recipesdraft WHERE recipe_id = :id")
+    suspend fun selectRecipesDraft(id:Int):RecipesDraft
+
+    @Query("UPDATE recipesdraft SET name=:name, category=:category, poster=:poster WHERE recipe_id=:uuid")
+    suspend fun updateRecipeDraft(name:String, category:String, poster:String, uuid: Int)
+
+    @Delete
+    suspend fun deleteRecipesDraft(recipesDraft: RecipesDraft)
+
+    @Delete
+    suspend fun deleteRecipesDraft(recipesDraft: List<RecipesDraft>)
+
+    //
 
     @Insert
     suspend fun insertAllPreparation(preparations: Preparations)
@@ -63,6 +102,8 @@ interface FoodRecipeDao {
 
     @Query("SELECT * FROM preparations WHERE recipe_id_prep = :id")
     suspend fun selectPreparation(id:Int):Preparations
+
+    //
 
     @Insert
     suspend fun insertAllIngredient(ingredients: Ingredients)

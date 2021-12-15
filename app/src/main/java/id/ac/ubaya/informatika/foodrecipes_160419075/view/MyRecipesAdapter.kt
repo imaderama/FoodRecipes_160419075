@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
 import id.ac.ubaya.informatika.foodrecipes_160419075.databinding.MyrecipeListItemBinding
 import id.ac.ubaya.informatika.foodrecipes_160419075.databinding.RecipeListItemBinding
+import id.ac.ubaya.informatika.foodrecipes_160419075.model.MyRecipes
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipe
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipes
 import id.ac.ubaya.informatika.foodrecipes_160419075.util.loadImage
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_my_recipes.view.*
 import kotlinx.android.synthetic.main.myrecipe_list_item.view.*
 import kotlinx.android.synthetic.main.recipe_list_item.view.*
 
-class MyRecipesAdapter(val recipeList:ArrayList<Recipes>): RecyclerView.Adapter<MyRecipesAdapter.MyRecipeViewHolder>(), ImageViewClickListener {
+class MyRecipesAdapter(val recipeList:ArrayList<Recipes>): RecyclerView.Adapter<MyRecipesAdapter.MyRecipeViewHolder>(), ButtonEditClickListener, ButtonPIClickListener {
     class MyRecipeViewHolder(val view: MyrecipeListItemBinding): RecyclerView.ViewHolder(view.root)
 
     fun updateRecipeList(newRecipeList:List<Recipes>){
@@ -36,8 +37,13 @@ class MyRecipesAdapter(val recipeList:ArrayList<Recipes>): RecyclerView.Adapter<
     override fun onBindViewHolder(holder: MyRecipeViewHolder, position: Int) {
         with(holder.view){
             recipe =recipeList[position]
-            imageViewListener = this@MyRecipesAdapter
+            editListener = this@MyRecipesAdapter
+            addPIListener = this@MyRecipesAdapter
             imageUrl = recipeList[position].poster
+            if(recipeList[position].public_stat == 0){
+                btnAddIngPrep.visibility = View.VISIBLE
+                btnEdit.visibility = View.GONE
+            }
 //            txtNamaRecipe.text = recipeList[position].name
 //            imageView3.loadImage(recipeList[position].poster.toString(), holder.view.progressBar5)
 
@@ -59,9 +65,21 @@ class MyRecipesAdapter(val recipeList:ArrayList<Recipes>): RecyclerView.Adapter<
         return recipeList.size
     }
 
-    override fun onImageViewClick(v: View) {
+    override fun onButtonEditClick(v: View) {
         val action = MyRecipesFragmentDirections.actionRecipeDetail2(v.tag.toString().toInt()
         )
         Navigation.findNavController(v).navigate(action)
     }
+
+    override fun onButtonPIClick(v: View) {
+        val action = MyRecipesFragmentDirections.actionCreatePIFragment(v.tag.toString().toInt()
+        )
+        Navigation.findNavController(v).navigate(action)
+    }
+
+//    override fun onImageViewClick(v: View) {
+//        val action = MyRecipesFragmentDirections.actionRecipeDetail2(v.tag.toString().toInt()
+//        )
+//        Navigation.findNavController(v).navigate(action)
+//    }
 }
