@@ -119,4 +119,7 @@ interface FoodRecipeDao {
 
     @Query("SELECT * FROM ingredients WHERE recipe_id_ing = :id")
     suspend fun selectIngredient(id:Int):Ingredients
+
+    @Query("DELETE FROM ingredients")
+    suspend fun deleteAllIngredients()
 }

@@ -16,11 +16,11 @@ import id.ac.ubaya.informatika.foodrecipes_160419075.databinding.FragmentCreateB
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Ingredients
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.MyRecipes
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipes
-import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.DetailRecipeViewModelViewModel
+import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.DetailRecipeViewModel
 import kotlinx.android.synthetic.main.fragment_create.*
 
 class CreateFragment : Fragment(), ButtonAddClickListener, RadioClickListener {
-    private lateinit var viewModel:DetailRecipeViewModelViewModel
+    private lateinit var viewModel: DetailRecipeViewModel
     private lateinit var dataBinding:FragmentCreateBinding
 
     var text = ""
@@ -36,7 +36,7 @@ class CreateFragment : Fragment(), ButtonAddClickListener, RadioClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(DetailRecipeViewModelViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(DetailRecipeViewModel::class.java)
 //        dataBinding.myrecipe = MyRecipes("",4,0,"")
         dataBinding.recipe = Recipes("","",0,"",0)
         dataBinding.listener = this

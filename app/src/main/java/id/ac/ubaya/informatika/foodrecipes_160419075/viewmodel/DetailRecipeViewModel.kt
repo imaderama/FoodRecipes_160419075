@@ -19,7 +19,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class DetailRecipeViewModelViewModel(application: Application):AndroidViewModel(application), CoroutineScope {
+class DetailRecipeViewModel(application: Application):AndroidViewModel(application), CoroutineScope {
     private val job = Job()
 //    val recipeLD = MutableLiveData<MyRecipes>()
     val recipeLD = MutableLiveData<Recipes>()

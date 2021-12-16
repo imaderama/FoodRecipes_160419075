@@ -29,6 +29,10 @@ interface ButtonPIClickListener {
     fun onButtonPIClick(v: View)
 }
 
+interface ButtonAddPIClickListener {
+    fun onButtonAddPIClick(v: View)
+}
+
 interface RecipeShareClickListener {
     fun onRecipeShareClick(v: View)
 }
