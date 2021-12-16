@@ -44,6 +44,46 @@ class DetailRecipeViewModel(application: Application):AndroidViewModel(applicati
         }
     }
 
+    fun updateRecipe(name:String, category:String, poster:String, id: Int){
+        queue = Volley.newRequestQueue(getApplication())
+        var url = "https://ubaya.fun/hybrid/160419075/updaterecipe.php"
+
+        val stringRequest = object : StringRequest(
+            Request.Method.POST, url,
+            { response ->
+                val sType = object : TypeToken<Recipes>() { }.type
+                val result = Gson().fromJson<Recipes>(response, sType )
+//                preparationLD.value = result
+
+                launch {
+                    val db = buildDB(getApplication())
+                    db.recipeDao().updateRecipe(name, category, poster, id)
+                }
+//                loadingLD.value = false
+                Log.d("showvolley", response.toString())
+
+            },
+            {
+//                loadingErrorLD.value = true
+//                loadingLD.value = false
+                Log.d("showvolley", it.toString())
+            }
+        ){
+            override fun getParams(): MutableMap<String, String> {
+                val params = HashMap<String, String>()
+//                Log.d("AmbilParam", "Dapat")
+                params["recipe_id"] = id.toString()
+                params["name"] = name.toString()
+                params["category"] = category.toString()
+                params["poster"] = poster.toString()
+                return params
+            }
+        }
+
+        stringRequest.tag = TAG
+        queue?.add(stringRequest)
+    }
+
 
     fun addRecipe(recipe:Recipes) {
         queue = Volley.newRequestQueue(getApplication())

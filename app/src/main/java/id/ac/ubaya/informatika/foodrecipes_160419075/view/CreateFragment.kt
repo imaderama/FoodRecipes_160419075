@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
 import id.ac.ubaya.informatika.foodrecipes_160419075.databinding.FragmentCreateBinding
@@ -72,6 +73,8 @@ class CreateFragment : Fragment(), ButtonAddClickListener, RadioClickListener {
                     dataBinding.recipe!!.toString(),
                     Toast.LENGTH_SHORT
                 ).show()
+                val action = CreateFragmentDirections.actionBackToListFragment()
+                Navigation.findNavController(v).navigate(action)
             }
             setNegativeButton("Cancel", null)
 

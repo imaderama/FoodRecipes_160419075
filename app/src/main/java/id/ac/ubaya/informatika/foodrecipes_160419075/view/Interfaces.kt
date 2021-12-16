@@ -41,6 +41,10 @@ interface ButtonAddClickListener {
     fun onButtonAddClick(v: View)
 }
 
+interface ButtonSaveChangeClickListener {
+    fun onButtonSaveChangeClick(v: View, obj: Recipes)
+}
+
 interface RadioClickListener {
     fun onRadioClick(v: View, category:String, obj:Recipes)
 }

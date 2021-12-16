@@ -15,12 +15,6 @@
         <action
             android:id="@+id/actionOptionFragment"
             app:destination="@id/optionFragment" />
-        <argument
-            android:name="username"
-            app:argType="string" />
-        <argument
-            android:name="password"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/recipeDetailFragment"
@@ -56,6 +50,9 @@
         <action
             android:id="@+id/actionCreatePIFragment"
             app:destination="@id/createPrepAndIngFragment" />
+        <action
+            android:id="@+id/actionEditFragment"
+            app:destination="@id/editFragment" />
     </fragment>
     <fragment
         android:id="@+id/preparationListFragment"
@@ -90,7 +87,11 @@
     <fragment
         android:id="@+id/itemCreateRecipe"
         android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.CreateFragment"
-        android:label="CreateFragment" />
+        android:label="CreateFragment" >
+        <action
+            android:id="@+id/actionBackToListFragment"
+            app:destination="@id/itemList" />
+    </fragment>
     <fragment
         android:id="@+id/createPrepAndIngFragment"
         android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.CreatePrepAndIngFragment"
@@ -98,5 +99,19 @@
         <argument
             android:name="id"
             app:argType="integer" />
+        <action
+            android:id="@+id/actionBackToMyRecipesFragment"
+            app:destination="@id/itemMyRecipes" />
+    </fragment>
+    <fragment
+        android:id="@+id/editFragment"
+        android:name="id.ac.ubaya.informatika.foodrecipes_160419075.view.EditFragment"
+        android:label="EditFragment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/actionGoBackToMyRecipesFragment"
+            app:destination="@id/itemMyRecipes" />
     </fragment>
 </navigation>

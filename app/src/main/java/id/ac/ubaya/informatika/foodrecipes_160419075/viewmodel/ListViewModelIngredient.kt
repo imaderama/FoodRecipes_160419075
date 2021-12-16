@@ -13,12 +13,20 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Ingredients
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipe
+import id.ac.ubaya.informatika.foodrecipes_160419075.util.buildDB
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.json.JSONObject
+import kotlin.coroutines.CoroutineContext
 
-class ListViewModelIngredient(application: Application): AndroidViewModel(application) {
+class ListViewModelIngredient(application: Application): AndroidViewModel(application),
+    CoroutineScope {
     val ingredentsLD = MutableLiveData<List<Ingredients>>()
     val loadingErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
+    private val job = Job()
 
     private val TAG = "volleyTag"
     private var queue: RequestQueue?= null
@@ -30,28 +38,6 @@ class ListViewModelIngredient(application: Application): AndroidViewModel(applic
         queue = Volley.newRequestQueue(getApplication())
         var url = "https://ubaya.fun/hybrid/160419075/listingredient.php"
 
-//        val stringRequest = object : StringRequest(Request.Method.GET, url,
-//                { response ->
-//                    val sType = object : TypeToken<List<Ingredient>>() { }.type
-//                    val result = Gson().fromJson<List<Ingredient>>(response, sType )
-//                    ingredentsLD.value = result
-//
-//                    loadingLD.value = false
-//                    Log.d("showvolley", response.toString())
-//
-//                },
-//                {
-//                    loadingErrorLD.value = true
-//                    loadingLD.value = false
-//                    Log.d("showvolley", it.toString())
-//                }
-//        ){
-//            override fun getParams(): MutableMap<String, String> {
-//                val params = HashMap<String, String>()
-//                params["id"] = id.toString()
-//                return params
-//            }
-//        }
         var stringRequest = object : StringRequest(
             Request.Method.POST,
             url,
@@ -59,6 +45,13 @@ class ListViewModelIngredient(application: Application): AndroidViewModel(applic
                     val sType = object : TypeToken<List<Ingredients>>() { }.type
                     val result = Gson().fromJson<List<Ingredients>>(response, sType )
                     ingredentsLD.value = result
+
+//                    launch {
+//    //            val db = Room.databaseBuilder(getApplication(),
+//    //                TodoDatabase::class.java, "tododb").build()
+//                        val db = buildDB(getApplication())
+//                        db.recipeDao().insertAllIngredients(result)
+//                    }
 
                     loadingLD.value = false
                     Log.d("showvolley", response.toString())
@@ -69,35 +62,6 @@ class ListViewModelIngredient(application: Application): AndroidViewModel(applic
                     loadingLD.value = false
                     Log.d("showvolley", it.toString())
                 }
-//            Response.Listener {
-////                val sType = object : TypeToken<List<Recipe>>() { }.type
-////                val result = Gson().fromJson<List<Recipe>>(response, sType )
-////                ingredentsLD.value = result
-////
-////                loadingLD.value = false
-//                val obj = JSONObject(it)
-//                val data = obj.getJSONArray("data")
-//                if(data.length() > 0){
-//                    for(i in 0 until data.length()){
-//                        // Ambil JSON Object untuk setiap index
-//                        val playObj = data.getJSONObject(i)
-//                        val response = ""
-//                        // Buat Object Playlist, masukkan data dari JSON Object
-//                        with(playObj){
-//                            val sType = object : TypeToken<List<Recipe>>() { }.type
-//                            val result = Gson().fromJson<List<Recipe>>(sType)
-//                            ingredentsLD.value = result
-//                            val kode = getString("kode")
-//                            val nama = getString("nama")
-//                            var sks = getInt("sks")
-//                            val nrp = getString("nrp")
-//                        }
-//                    }
-//                }
-//            },
-//            Response.ErrorListener {
-//                Log.e("apiresult", it.toString())
-//            }
         ){
             override fun getParams(): MutableMap<String, String> {
                 val params = HashMap<String, String>()
@@ -111,8 +75,48 @@ class ListViewModelIngredient(application: Application): AndroidViewModel(applic
         return ingredentsLD.value.toString()
     }
 
+    fun refresh(){
+        loadingErrorLD.value = false
+        loadingLD.value = true
+
+        queue = Volley.newRequestQueue(getApplication())
+        var url = "https://ubaya.fun/hybrid/160419075/listallingredient.php"
+
+        var stringRequest = StringRequest(
+            Request.Method.GET,
+            url,
+            { response ->
+                val sType = object : TypeToken<List<Ingredients>>() { }.type
+                val result = Gson().fromJson<List<Ingredients>>(response, sType )
+                ingredentsLD.value = result
+
+                launch {
+                    //            val db = Room.databaseBuilder(getApplication(),
+                    //                TodoDatabase::class.java, "tododb").build()
+                    val db = buildDB(getApplication())
+                    db.recipeDao().insertAllIngredients(result)
+                }
+
+                loadingLD.value = false
+                Log.d("showvolley", response.toString())
+
+            },
+            {
+                loadingErrorLD.value = true
+                loadingLD.value = false
+                Log.d("showvolley", it.toString())
+            }
+        )
+        stringRequest.tag = TAG
+        queue?.add(stringRequest)
+//        return ingredentsLD.value.toString()
+    }
+
     override fun onCleared() {
         super.onCleared()
         queue?.cancelAll(TAG)
     }
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
 }

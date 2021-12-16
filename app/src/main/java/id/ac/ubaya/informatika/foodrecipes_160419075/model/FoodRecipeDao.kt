@@ -1,9 +1,6 @@
 package id.ac.ubaya.informatika.foodrecipes_160419075.model
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface FoodRecipeDao {
@@ -24,6 +21,12 @@ interface FoodRecipeDao {
 
     @Query("SELECT * FROM recipes ORDER BY recipe_id DESC LIMIT 1 ")
     suspend fun selectLastRecipe():Recipes
+
+    @Query("UPDATE recipes SET public_stat=1 WHERE recipe_id=:uuid")
+    suspend fun setPublicRecipe(uuid: Int)
+
+    @Query("UPDATE recipes SET name=:name, category=:category, poster=:poster WHERE recipe_id=:uuid")
+    suspend fun updateRecipe(name:String, category: String, poster: String, uuid: Int)
 
     @Delete
     suspend fun deleteRecipe(recipes: Recipes)
@@ -91,7 +94,7 @@ interface FoodRecipeDao {
 
     //
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAllPreparation(preparations: Preparations)
 
     @Insert
@@ -103,13 +106,16 @@ interface FoodRecipeDao {
     @Query("SELECT * FROM preparations WHERE recipe_id_prep = :id")
     suspend fun selectPreparation(id:Int):Preparations
 
+    @Query("DELETE FROM preparations WHERE preparation_id = :id")
+    suspend fun deletePreparation(id: Int)
+
     //
 
-    @Insert
-    suspend fun insertAllIngredient(ingredients: Ingredients)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAllIngredient(ingredients:Ingredients)
 
     @Insert
-    suspend fun insertAllIngredients(ingredients: List<Ingredients>)
+    suspend fun insertAllIngredients(ingredients:List<Ingredients>)
 
     @Query("SELECT * FROM ingredients")
     suspend fun selectAllIngredient():List<Ingredients>
@@ -122,4 +128,7 @@ interface FoodRecipeDao {
 
     @Query("DELETE FROM ingredients")
     suspend fun deleteAllIngredients()
+
+    @Query("DELETE FROM ingredients WHERE ingredient_id = :id")
+    suspend fun deleteIngredient(id: Int)
 }

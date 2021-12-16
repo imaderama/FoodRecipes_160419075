@@ -8,7 +8,10 @@
             type="id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipes" />
         <variable
             name="listener"
-            type="id.ac.ubaya.informatika.foodrecipes_160419075.view.ButtonAddClickListener" />
+            type="id.ac.ubaya.informatika.foodrecipes_160419075.view.ButtonSaveChangeClickListener" />
+        <variable
+            name="category"
+            type="Integer" />
         <variable
             name="ingredient"
             type="String" />
@@ -47,8 +50,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="70dp"
-                    android:onClick="@{listener::onButtonAddClick}"
-                    android:text="Add Recipe"
+                    android:onClick="@{(view)->listener.onButtonSaveChangeClick(view, recipe)}"
+                    android:text="Save Changes"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +65,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
-                    android:text="Create Recipe"
+                    android:text="Edit Recipe"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -124,7 +127,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:tag="Breakfast"
-                        android:checked= "@{recipe.category==breakfast?true:false}"
+                        android:checked= "@{category==4?true:false}"
                         android:onClick="@{(view) -> radiolistener.onRadioClick(view, breakfast, recipe)}"
                         android:text="Breakfast" />
 
@@ -133,7 +136,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:tag="Dessert"
-                        android:checked="@{recipe.category==dessert?true:false}"
+                        android:checked="@{category==3?true:false}"
                         android:onClick="@{(view) -> radiolistener.onRadioClick(view, dessert, recipe)}"
                         android:text="Dessert" />
 
@@ -142,7 +145,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:tag="Dinner"
-                        android:checked="@{recipe.category==dinner?true:false}"
+                        android:checked="@{category==2?true:false}"
                         android:onClick="@{(view) -> radiolistener.onRadioClick(view, dinner, recipe)}"
                         android:text="Dinner" />
 
@@ -151,7 +154,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:tag="Drink"
-                        android:checked="@{recipe.category==drink?true:false}"
+                        android:checked="@{category==1?true:false}"
                         android:onClick="@{(view) -> radiolistener.onRadioClick(view, drink, recipe)}"
                         android:text="Drink" />
                 </RadioGroup>

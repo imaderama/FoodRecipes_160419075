@@ -66,7 +66,7 @@ class MyRecipesAdapter(val recipeList:ArrayList<Recipes>): RecyclerView.Adapter<
     }
 
     override fun onButtonEditClick(v: View) {
-        val action = MyRecipesFragmentDirections.actionRecipeDetail2(v.tag.toString().toInt()
+        val action = MyRecipesFragmentDirections.actionEditFragment(v.tag.toString().toInt()
         )
         Navigation.findNavController(v).navigate(action)
     }

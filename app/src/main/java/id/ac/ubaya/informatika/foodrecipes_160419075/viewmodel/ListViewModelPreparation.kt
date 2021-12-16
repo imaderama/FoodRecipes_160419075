@@ -11,11 +11,19 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Preparations
+import id.ac.ubaya.informatika.foodrecipes_160419075.util.buildDB
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class ListViewModelPreparation(application: Application): AndroidViewModel(application) {
+class ListViewModelPreparation(application: Application): AndroidViewModel(application),
+    CoroutineScope {
     val preparationsLD = MutableLiveData<List<Preparations>>()
     val loadingErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
+    private val job = Job()
 
     private val TAG = "volleyTag"
     private var queue: RequestQueue?= null
@@ -33,6 +41,13 @@ class ListViewModelPreparation(application: Application): AndroidViewModel(appli
                 val sType = object : TypeToken<List<Preparations>>() { }.type
                 val result = Gson().fromJson<List<Preparations>>(response, sType )
                 preparationsLD.value = result
+
+//                launch {
+////            val db = Room.databaseBuilder(getApplication(),
+////                TodoDatabase::class.java, "tododb").build()
+//                    val db = buildDB(getApplication())
+//                    db.recipeDao().insertAllPreparations(result)
+//                }
 
                 loadingLD.value = false
                 Log.d("showvolley", response.toString())
@@ -56,8 +71,48 @@ class ListViewModelPreparation(application: Application): AndroidViewModel(appli
         return preparationsLD.value.toString()
     }
 
+    fun refresh(){
+        loadingErrorLD.value = false
+        loadingLD.value = true
+
+        queue = Volley.newRequestQueue(getApplication())
+        var url = "https://ubaya.fun/hybrid/160419075/listallpreparation.php"
+        var stringRequest = StringRequest(
+            Request.Method.GET,
+            url,
+            { response ->
+                val sType = object : TypeToken<List<Preparations>>() { }.type
+                val result = Gson().fromJson<List<Preparations>>(response, sType )
+                preparationsLD.value = result
+
+                launch {
+//            val db = Room.databaseBuilder(getApplication(),
+//                TodoDatabase::class.java, "tododb").build()
+                    val db = buildDB(getApplication())
+                    db.recipeDao().insertAllPreparations(result)
+                }
+
+                loadingLD.value = false
+                Log.d("showvolley", response.toString())
+
+            },
+            {
+                loadingErrorLD.value = true
+                loadingLD.value = false
+                Log.d("showvolley", it.toString())
+            }
+        )
+
+        stringRequest.tag = TAG
+        queue?.add(stringRequest)
+//        return preparationsLD.value.toString()
+    }
+
     override fun onCleared() {
         super.onCleared()
         queue?.cancelAll(TAG)
     }
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
 }
