@@ -44,6 +44,7 @@ class OptionFragment : BottomSheetDialogFragment() {
             dataBinding.recipe = it
             dataBinding.imageUrl = it.poster
 //            imageView2.loadImage(it[0].poster.toString(), progressBar2)
+            //TEST
         })
     }
 }
