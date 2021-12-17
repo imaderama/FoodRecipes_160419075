@@ -103,11 +103,14 @@ interface FoodRecipeDao {
     @Query("SELECT * FROM preparations")
     suspend fun selectAllPreparation():List<Preparations>
 
-    @Query("SELECT * FROM preparations WHERE recipe_id_prep = :id")
-    suspend fun selectPreparation(id:Int):Preparations
+    @Query("SELECT * FROM preparations WHERE recipe_id_prep = :id ORDER BY step")
+    suspend fun selectPreparation(id:Int):List<Preparations>
 
     @Query("DELETE FROM preparations WHERE preparation_id = :id")
     suspend fun deletePreparation(id: Int)
+
+    @Query("DELETE FROM preparations")
+    suspend fun deleteAllPreparation()
 
     //
 
@@ -124,7 +127,7 @@ interface FoodRecipeDao {
     suspend fun updateIngredient(category:String, poster:String, uuid: Int)
 
     @Query("SELECT * FROM ingredients WHERE recipe_id_ing = :id")
-    suspend fun selectIngredient(id:Int):Ingredients
+    suspend fun selectIngredient(id:Int):List<Ingredients>
 
     @Query("DELETE FROM ingredients")
     suspend fun deleteAllIngredients()

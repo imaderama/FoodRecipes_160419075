@@ -24,7 +24,7 @@ class DetailRecipeViewModel(application: Application):AndroidViewModel(applicati
 //    val recipeLD = MutableLiveData<MyRecipes>()
     val recipeLD = MutableLiveData<Recipes>()
     val recipeLastLD = MutableLiveData<Recipes>()
-    val ingredientLD = MutableLiveData<Ingredients>()
+    val ingredentsLD = MutableLiveData<Ingredients>()
     val preparationLD = MutableLiveData<Preparations>()
 
     private val TAG = "volleyTag"
@@ -84,7 +84,6 @@ class DetailRecipeViewModel(application: Application):AndroidViewModel(applicati
         queue?.add(stringRequest)
     }
 
-
     fun addRecipe(recipe:Recipes) {
         queue = Volley.newRequestQueue(getApplication())
         var url = "https://ubaya.fun/hybrid/160419075/addrecipe.php"
@@ -129,6 +128,167 @@ class DetailRecipeViewModel(application: Application):AndroidViewModel(applicati
 
     }
 
+    fun addIngredients(ingredients: List<Ingredients>) {
+        launch {
+//            val db = Room.databaseBuilder(getApplication(),
+//                TodoDatabase::class.java, "tododb").build()
+            val db = buildDB(getApplication())
+            db.recipeDao().insertAllIngredients(ingredients)
+        }
+    }
+
+    fun addIngredient(ingredients: Ingredients) {
+        queue = Volley.newRequestQueue(getApplication())
+        var url = "https://ubaya.fun/hybrid/160419075/addingredient.php"
+
+        val stringRequest = object : StringRequest(
+            Request.Method.POST, url,
+            { response ->
+                val sType = object : TypeToken<Ingredients>() { }.type
+                val result = Gson().fromJson<Ingredients>(response, sType )
+                ingredentsLD.value = result
+
+//                launch {
+////            val db = Room.databaseBuilder(getApplication(),
+////                TodoDatabase::class.java, "tododb").build()
+//                    val db = buildDB(getApplication())
+//                    db.recipeDao().insertAllIngredient(ingredients)
+//                }
+//                loadingLD.value = false
+                Log.d("showvolley", response.toString())
+
+            },
+            {
+//                loadingErrorLD.value = true
+//                loadingLD.value = false
+                Log.d("showvolley", it.toString())
+            }
+        ){
+            override fun getParams(): MutableMap<String, String> {
+                val params = HashMap<String, String>()
+//                Log.d("AmbilParam", "Dapat")
+                params["recipe_id"] = ingredients.recipe_id_ing.toString()
+                params["item"] = ingredients.item.toString()
+                params["amount"] = ingredients.amount.toString()
+                return params
+            }
+        }
+
+        stringRequest.tag = TAG
+        queue?.add(stringRequest)
+//        launch {
+////            val db = Room.databaseBuilder(getApplication(),
+////                TodoDatabase::class.java, "tododb").build()
+//            val db = buildDB(getApplication())
+//            db.recipeDao().insertAllIngredient(ingredients)
+//        }
+    }
+
+    fun addPreparation(preparations: Preparations) {
+        queue = Volley.newRequestQueue(getApplication())
+        var url = "https://ubaya.fun/hybrid/160419075/addpreparation.php"
+
+        val stringRequest = object : StringRequest(
+            Request.Method.POST, url,
+            { response ->
+                val sType = object : TypeToken<Preparations>() { }.type
+                val result = Gson().fromJson<Preparations>(response, sType )
+                preparationLD.value = result
+
+//                launch {
+////            val db = Room.databaseBuilder(getApplication(),
+////                TodoDatabase::class.java, "tododb").build()
+//                    val db = buildDB(getApplication())
+//                    db.recipeDao().insertAllPreparation(result)
+//                }
+//                loadingLD.value = false
+                Log.d("showvolley", response.toString())
+
+            },
+            {
+//                loadingErrorLD.value = true
+//                loadingLD.value = false
+                Log.d("showvolley", it.toString())
+            }
+        ){
+            override fun getParams(): MutableMap<String, String> {
+                val params = HashMap<String, String>()
+//                Log.d("AmbilParam", "Dapat")
+                params["recipe_id"] = preparations.recipe_id_prep.toString()
+                params["step"] = preparations.step.toString()
+                params["description"] = preparations.description.toString()
+                return params
+            }
+        }
+
+        stringRequest.tag = TAG
+        queue?.add(stringRequest)
+    }
+
+    fun setPublicRecipe(id: Int) {
+        queue = Volley.newRequestQueue(getApplication())
+        var url = "https://ubaya.fun/hybrid/160419075/publicrecipe.php"
+
+        val stringRequest = object : StringRequest(
+            Request.Method.POST, url,
+            { response ->
+                val sType = object : TypeToken<Preparations>() { }.type
+                val result = Gson().fromJson<Preparations>(response, sType )
+//                preparationLD.value = result
+
+                launch {
+                    val db = buildDB(getApplication())
+                    db.recipeDao().setPublicRecipe(id)
+                }
+//                loadingLD.value = false
+                Log.d("showvolley", response.toString())
+
+            },
+            {
+//                loadingErrorLD.value = true
+//                loadingLD.value = false
+                Log.d("showvolley", it.toString())
+            }
+        ){
+            override fun getParams(): MutableMap<String, String> {
+                val params = HashMap<String, String>()
+//                Log.d("AmbilParam", "Dapat")
+                params["recipe_id"] = id.toString()
+                return params
+            }
+        }
+
+        stringRequest.tag = TAG
+        queue?.add(stringRequest)
+    }
+
+    fun deleteAllIngredients() {
+        launch {
+//            val db = Room.databaseBuilder(getApplication(),
+//                TodoDatabase::class.java, "tododb").build()
+            val db = buildDB(getApplication())
+            db.recipeDao().deleteAllIngredients()
+        }
+    }
+
+    fun deleteIngredient(id: Int) {
+        launch {
+//            val db = Room.databaseBuilder(getApplication(),
+//                TodoDatabase::class.java, "tododb").build()
+            val db = buildDB(getApplication())
+            db.recipeDao().deleteIngredient(id)
+        }
+    }
+
+    fun deletePreparation(id: Int) {
+        launch {
+//            val db = Room.databaseBuilder(getApplication(),
+//                TodoDatabase::class.java, "tododb").build()
+            val db = buildDB(getApplication())
+            db.recipeDao().deletePreparation(id)
+        }
+    }
+
     fun deleteAllMyRecipe(id: Int) {
         launch {
 //            val db = Room.databaseBuilder(getApplication(),
@@ -146,6 +306,76 @@ class DetailRecipeViewModel(application: Application):AndroidViewModel(applicati
             recipeLastLD.value = db.recipeDao().selectLastRecipe()
         }
     }
+
+    /*fun refreshPrep(){
+
+        queue = Volley.newRequestQueue(getApplication())
+        var url = "https://ubaya.fun/hybrid/160419075/listallpreparation.php"
+        var stringRequest = StringRequest(
+            Request.Method.GET,
+            url,
+            { response ->
+                val sType = object : TypeToken<List<Preparations>>() { }.type
+                val result = Gson().fromJson<List<Preparations>>(response, sType )
+//                preparationsLD.value = result
+
+                launch {
+//            val db = Room.databaseBuilder(getApplication(),
+//                TodoDatabase::class.java, "tododb").build()
+                    val db = buildDB(getApplication())
+                    db.recipeDao().insertAllPreparations(result)
+                }
+
+//                loadingLD.value = false
+                Log.d("showvolley", response.toString())
+
+            },
+            {
+//                loadingErrorLD.value = true
+//                loadingLD.value = false
+                Log.d("showvolley", it.toString())
+            }
+        )
+
+        stringRequest.tag = TAG
+        queue?.add(stringRequest)
+//        return preparationsLD.value.toString()
+    }*/
+
+    /*fun refreshIng(){
+
+        queue = Volley.newRequestQueue(getApplication())
+        var url = "https://ubaya.fun/hybrid/160419075/listallingredient.php"
+
+        var stringRequest = StringRequest(
+            Request.Method.GET,
+            url,
+            { response ->
+                val sType = object : TypeToken<List<Ingredients>>() { }.type
+                val result = Gson().fromJson<List<Ingredients>>(response, sType )
+//                ingredentsLD.value = result
+
+                launch {
+                    //            val db = Room.databaseBuilder(getApplication(),
+                    //                TodoDatabase::class.java, "tododb").build()
+                    val db = buildDB(getApplication())
+                    db.recipeDao().insertAllIngredients(result)
+                }
+
+//                loadingLD.value = false
+                Log.d("showvolley", response.toString())
+
+            },
+            {
+//                loadingErrorLD.value = true
+//                loadingLD.value = false
+                Log.d("showvolley", it.toString())
+            }
+        )
+        stringRequest.tag = TAG
+        queue?.add(stringRequest)
+//        return ingredentsLD.value.toString()
+    }*/
 
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main

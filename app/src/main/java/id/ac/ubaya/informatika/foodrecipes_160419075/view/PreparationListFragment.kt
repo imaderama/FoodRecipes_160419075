@@ -10,13 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
-import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.ListViewModelIngredient
-import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.ListViewModelPreparation
-import kotlinx.android.synthetic.main.fragment_ingredient_list.*
+import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.fragment_preparation_list.*
 
 class PreparationListFragment : Fragment() {
-    private  lateinit var viewModel: ListViewModelPreparation
+    private  lateinit var viewModel: ListViewModel
     private val preparationListAdapter = PreparationListAdapter(arrayListOf())
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,8 +30,9 @@ class PreparationListFragment : Fragment() {
         if(arguments!=null){
 //            var id = IngredientListFragmentArgs.fromBundle(requireArguments()).id
         }
-        viewModel = ViewModelProvider(this).get(ListViewModelPreparation::class.java)
-        viewModel.refresh(PreparationListFragmentArgs.fromBundle(requireArguments()).id.toString())
+        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+        viewModel.refreshPrep(PreparationListFragmentArgs.fromBundle(requireArguments()).id)
+
 
         Log.d("SHOW ID", IngredientListFragmentArgs.fromBundle(requireArguments()).id.toString())
 

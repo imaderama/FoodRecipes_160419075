@@ -162,8 +162,6 @@ class CreatePrepAndIngViewModel(application: Application): AndroidViewModel(appl
         queue?.add(stringRequest)
     }
 
-
-
     fun deleteAllIngredients() {
         launch {
 //            val db = Room.databaseBuilder(getApplication(),
@@ -181,6 +179,7 @@ class CreatePrepAndIngViewModel(application: Application): AndroidViewModel(appl
             db.recipeDao().deleteIngredient(id)
         }
     }
+
     fun deletePreparation(id: Int) {
         launch {
 //            val db = Room.databaseBuilder(getApplication(),

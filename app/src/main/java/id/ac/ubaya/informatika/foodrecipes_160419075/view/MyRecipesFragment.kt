@@ -9,13 +9,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
-import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.MyRecipesViewModel
+import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.fragment_my_recipes.*
 
 class MyRecipesFragment : Fragment() {
-    private  lateinit var viewModel: MyRecipesViewModel
+    private  lateinit var viewModel: ListViewModel
     private val myRecipeListAdapter = MyRecipesAdapter(arrayListOf())
-    private  lateinit var viewModel2: MyRecipesViewModel
+    private  lateinit var viewModel2: ListViewModel
     private val myRecipeListAdapter2 = MyRecipesAdapter(arrayListOf())
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -26,11 +26,11 @@ class MyRecipesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(MyRecipesViewModel::class.java)
-        viewModel.refresh()
+        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+        viewModel.refreshMyRecipes()
 
-        viewModel2 = ViewModelProvider(this).get(MyRecipesViewModel::class.java)
-        viewModel2.refresh2()
+        viewModel2 = ViewModelProvider(this).get(ListViewModel::class.java)
+        viewModel2.refreshDraft()
 
         recViewMyRecipe.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recViewMyRecipe.adapter = myRecipeListAdapter
@@ -45,8 +45,8 @@ class MyRecipesFragment : Fragment() {
             recViewDraft.visibility = View.GONE
             txtErrorMyRecipe.visibility = View.GONE
             progressBarBF.visibility = View.VISIBLE
-            viewModel.refresh()
-            viewModel2.refresh2()
+            viewModel.refreshMyRecipes()
+            viewModel2.refreshDraft()
             SwipeRefreshLayout.isRefreshing = false
         }
 
@@ -57,7 +57,7 @@ class MyRecipesFragment : Fragment() {
     }
 
     fun observeViewModel(){
-        viewModel.recipesLD.observe(viewLifecycleOwner, Observer {
+        viewModel.recipessLD.observe(viewLifecycleOwner, Observer {
             myRecipeListAdapter.updateRecipeList(it)
         })
 

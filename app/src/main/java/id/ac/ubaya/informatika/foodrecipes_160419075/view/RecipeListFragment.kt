@@ -28,6 +28,8 @@ class RecipeListFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
         viewModel.refresh()
+        viewModel.refreshIng()
+        viewModel.refreshPrep()
 
         recView.layoutManager = LinearLayoutManager(context)
         recView.adapter = recipeListAdapter

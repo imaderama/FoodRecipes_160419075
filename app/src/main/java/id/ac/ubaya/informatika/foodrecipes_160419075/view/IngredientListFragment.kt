@@ -10,13 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
-import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.ListViewModelIngredient
+import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.fragment_ingredient_list.*
-import kotlinx.android.synthetic.main.fragment_recipe_list.*
 
 
 class IngredientListFragment : Fragment() {
-    private  lateinit var viewModel:ListViewModelIngredient
+    private  lateinit var viewModel:ListViewModel
     private val ingredientListAdapter = IngredientListAdapter(arrayListOf())
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,8 +30,8 @@ class IngredientListFragment : Fragment() {
         if(arguments!=null){
 //            var id = IngredientListFragmentArgs.fromBundle(requireArguments()).id
         }
-        viewModel = ViewModelProvider(this).get(ListViewModelIngredient::class.java)
-        viewModel.refresh(IngredientListFragmentArgs.fromBundle(requireArguments()).id.toString())
+        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
+        viewModel.refreshIng(IngredientListFragmentArgs.fromBundle(requireArguments()).id)
 
         Log.d("SHOW ID", IngredientListFragmentArgs.fromBundle(requireArguments()).id.toString())
 

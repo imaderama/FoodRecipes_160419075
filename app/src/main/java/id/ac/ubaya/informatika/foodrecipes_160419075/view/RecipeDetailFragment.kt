@@ -9,15 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.squareup.picasso.Picasso
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
 import id.ac.ubaya.informatika.foodrecipes_160419075.databinding.FragmentRecipeDetailBinding
-import id.ac.ubaya.informatika.foodrecipes_160419075.util.loadImage
-import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.DetailViewModel
+import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.DetailRecipeViewModel
 import kotlinx.android.synthetic.main.fragment_recipe_detail.*
 
 class RecipeDetailFragment : Fragment() {
-    private lateinit var viewModel:DetailViewModel
+    private lateinit var viewModel:DetailRecipeViewModel
     private lateinit var dataBinding:FragmentRecipeDetailBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +30,7 @@ class RecipeDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(DetailRecipeViewModel::class.java)
 
         val id = RecipeDetailFragmentArgs.fromBundle((requireArguments())).id
         viewModel.fetch(id)
@@ -66,8 +64,8 @@ class RecipeDetailFragment : Fragment() {
 
     fun observeViewModel() {
         viewModel.recipeLD.observe(viewLifecycleOwner, Observer {
-            dataBinding.recipe = it[0]
-            dataBinding.imageUrl = it[0].poster.toString()
+            dataBinding.recipe = it
+            dataBinding.imageUrl = it.poster.toString()
 //            imageView2.loadImage(it[0].poster.toString(), progressBar2)
         })
     }

@@ -17,6 +17,7 @@ import id.ac.ubaya.informatika.foodrecipes_160419075.databinding.FragmentCreateB
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Ingredients
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.MyRecipes
 import id.ac.ubaya.informatika.foodrecipes_160419075.model.Recipes
+import id.ac.ubaya.informatika.foodrecipes_160419075.util.NotificationHelper
 import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.DetailRecipeViewModel
 import kotlinx.android.synthetic.main.fragment_create.*
 
@@ -62,7 +63,7 @@ class CreateFragment : Fragment(), ButtonAddClickListener, RadioClickListener {
         AlertDialog.Builder(context).apply {
             setMessage("You want to add this recipe?")
             setPositiveButton("Yes") { _, _ ->
-
+                NotificationHelper(v.context).createNotificationDraft("Recipe Created","A new recipe have been saved into draft")
                 viewModel.addRecipe(dataBinding.recipe!!)
 //                viewModel.selectLastRecipe()
 

@@ -9,13 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.ac.ubaya.informatika.foodrecipes_160419075.R
-import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.DiscoverViewModel
 import id.ac.ubaya.informatika.foodrecipes_160419075.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.fragment_discover.*
-import kotlinx.android.synthetic.main.fragment_recipe_list.*
 
 class DiscoverFragment : Fragment() {
-    private  lateinit var viewModel: DiscoverViewModel
+    private  lateinit var viewModel: ListViewModel
     private val recipeListAdapter = DiscoverAdapter(arrayListOf())
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -26,7 +24,7 @@ class DiscoverFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(DiscoverViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
         viewModel.refresh(txtCari.text.toString())
 
         recyclerViewDiscover.layoutManager = LinearLayoutManager(context)
@@ -52,7 +50,7 @@ class DiscoverFragment : Fragment() {
     }
 
     fun observeViewModel(){
-        viewModel.recipesLD.observe(viewLifecycleOwner, Observer {
+        viewModel.recipessLD.observe(viewLifecycleOwner, Observer {
             recipeListAdapter.updateRecipeList(it)
         })
 
