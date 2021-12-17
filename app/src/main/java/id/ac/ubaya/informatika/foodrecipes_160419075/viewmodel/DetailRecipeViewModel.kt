@@ -307,74 +307,22 @@ class DetailRecipeViewModel(application: Application):AndroidViewModel(applicati
         }
     }
 
-    /*fun refreshPrep(){
+    /*fun refreshPrep(id: Int){
+        launch {
+            //            val db = Room.databaseBuilder(getApplication(),
+            //                TodoDatabase::class.java, "tododb").build()
+            val db = buildDB(getApplication())
+            preparationListLD.value = db.recipeDao().selectPreparation(id)
+        }
+    }
 
-        queue = Volley.newRequestQueue(getApplication())
-        var url = "https://ubaya.fun/hybrid/160419075/listallpreparation.php"
-        var stringRequest = StringRequest(
-            Request.Method.GET,
-            url,
-            { response ->
-                val sType = object : TypeToken<List<Preparations>>() { }.type
-                val result = Gson().fromJson<List<Preparations>>(response, sType )
-//                preparationsLD.value = result
-
-                launch {
-//            val db = Room.databaseBuilder(getApplication(),
-//                TodoDatabase::class.java, "tododb").build()
-                    val db = buildDB(getApplication())
-                    db.recipeDao().insertAllPreparations(result)
-                }
-
-//                loadingLD.value = false
-                Log.d("showvolley", response.toString())
-
-            },
-            {
-//                loadingErrorLD.value = true
-//                loadingLD.value = false
-                Log.d("showvolley", it.toString())
-            }
-        )
-
-        stringRequest.tag = TAG
-        queue?.add(stringRequest)
-//        return preparationsLD.value.toString()
-    }*/
-
-    /*fun refreshIng(){
-
-        queue = Volley.newRequestQueue(getApplication())
-        var url = "https://ubaya.fun/hybrid/160419075/listallingredient.php"
-
-        var stringRequest = StringRequest(
-            Request.Method.GET,
-            url,
-            { response ->
-                val sType = object : TypeToken<List<Ingredients>>() { }.type
-                val result = Gson().fromJson<List<Ingredients>>(response, sType )
-//                ingredentsLD.value = result
-
-                launch {
-                    //            val db = Room.databaseBuilder(getApplication(),
-                    //                TodoDatabase::class.java, "tododb").build()
-                    val db = buildDB(getApplication())
-                    db.recipeDao().insertAllIngredients(result)
-                }
-
-//                loadingLD.value = false
-                Log.d("showvolley", response.toString())
-
-            },
-            {
-//                loadingErrorLD.value = true
-//                loadingLD.value = false
-                Log.d("showvolley", it.toString())
-            }
-        )
-        stringRequest.tag = TAG
-        queue?.add(stringRequest)
-//        return ingredentsLD.value.toString()
+    fun refreshIng(id: Int){
+        launch {
+            //            val db = Room.databaseBuilder(getApplication(),
+            //                TodoDatabase::class.java, "tododb").build()
+            val db = buildDB(getApplication())
+            ingredentsListLD.value = db.recipeDao().selectIngredient(id)
+        }
     }*/
 
     override val coroutineContext: CoroutineContext

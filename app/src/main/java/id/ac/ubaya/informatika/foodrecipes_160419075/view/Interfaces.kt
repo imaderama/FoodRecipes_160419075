@@ -37,6 +37,10 @@ interface RecipeShareClickListener {
     fun onRecipeShareClick(v: View)
 }
 
+interface ButtonShareClickListener {
+    fun onButtonShareClick(v: View)
+}
+
 interface ButtonAddClickListener {
     fun onButtonAddClick(v: View)
 }
